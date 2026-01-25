@@ -1,0 +1,86 @@
+/* Main Grid */
+main {
+  background-color: rgba(0,0,0,0.5);
+  min-height:calc(100vh - 140px); 
+  padding:10px 0;
+  margin: 35% 0 60px 0;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 320px));
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.step-grid-container{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 每行 4 個，平均分配寬度 */
+  gap: 2rem;  
+  justify-content: center;
+}
+
+.arrow-card{
+  position: relative;      /* 讓偽元素相對於父元素定位 */
+  display: inline-block;   /* 或 block，依需求 */
+}
+
+.arrow-card::after {
+  content: "→";            /* 或使用 Unicode: "\2192" */
+  position: absolute;
+  right: -25px;             /* 右側距離 */
+  top: 50%;                /* 垂直置中 */
+  transform: translateY(-50%); /* 真正置中 */
+  font-size: 40px;         /* 箭頭大小 */
+  font-weight: bold;
+  color: gold;
+  animation: arrowMove 2s infinite;
+  z-index: 9999;
+}
+
+@keyframes arrowMove {
+  0%, 50%, 100% { transform: translateY(-50%) translateX(0); }
+  25% { transform: translateY(-50%) translateX(10px); }
+}
+
+.section-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 3rem 0 10px 0;
+  text-align: left;
+  color: gold;
+}
+
+@media (max-width: 1025px) {
+  main { 
+    min-height:calc(100vh - 140px); 
+    padding:10px 0;
+    margin: 250px 0 60px 0;
+  }
+
+  .step-grid-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 320px));
+    gap: 1.5rem;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 752px) {
+  .arrow-card::after {
+    content: "↓";
+    position: absolute;
+    top: 90%;       
+    right: 50%;       
+    transform: translateX(-50%);
+    font-size: 40px;
+    color: gold;
+    animation: arrowMoveDown 2s infinite;
+    z-index: 9999;
+  }
+
+  @keyframes arrowMoveDown {
+    0%, 50%, 100% { transform: translateX(-50%) translateY(0); }
+    25% { transform: translateX(-50%) translateY(10px); }
+  }
+}

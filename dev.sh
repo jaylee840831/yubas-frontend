@@ -4,7 +4,7 @@ IMAGE_NAME=yubas-frontend
 CONTAINER_NAME=yubas-frontend-container
 DOCKERFILE=docker_build/Dockerfile.dev
 
-# 關閉 Git Bash 路徑自動轉換
+# Git Bash on Windows 必備
 export MSYS_NO_PATHCONV=1
 
 echo "Building Docker image..."
@@ -27,6 +27,7 @@ docker run -it --rm \
   --name $CONTAINER_NAME \
   -p 4200:4200 \
   -v "$(pwd -W)":/app \
+  -v node_modules:/app/node_modules \
   -w /app \
   $IMAGE_NAME \
-  sh -c "npm install && ng serve --host 0.0.0.0"
+  sh -c "npm install && ng serve --host 0.0.0.0 --poll 2000"
