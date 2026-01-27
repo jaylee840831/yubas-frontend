@@ -1,0 +1,99 @@
+header{
+  width: 100%;
+  background-color: black;
+  color: white;
+  position: fixed;   /* 固定在畫面頂端 */
+  top: 0;            /* 從頂部開始 */
+  left: 0;
+  z-index: 1001;     /* 確保在最上層 */
+}
+
+/* Header 容器 */
+.header-container {
+  display: flex;
+  justify-content: space-between; /* 左右兩端對齊 */
+  align-items: center;            /* 垂直置中 */
+  padding: 1rem 0;
+  position: relative;
+}
+
+/* Logo */
+.header-container .logo {
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.hamburger {
+  display: none; /* 大螢幕隱藏 */
+  background: none;
+  border: none;
+  font-size: 2rem;      /* icon 大小 */
+  color: #fff;           /* icon 顏色 */
+}
+.hamburger span {
+  line-height: 1;
+}
+
+/* 導航欄 */
+nav {
+  display: flex;
+  gap: 1rem;
+}
+
+@media (max-width: 1025px) {
+  /* Logo */
+  .header-container .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+}
+
+/* 小螢幕 RWD */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;          /* 小螢幕顯示漢堡 */
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1001;
+  }
+
+  .hamburger span{
+    width: 30px;
+    background: black;
+    border-radius: 5px;
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: black;
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    z-index: 1000; 
+
+    /* 初始隱藏 */
+    transform: translateY(-100%); /* 從上方滑入 */
+    opacity: 0;                   /* 透明 */
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    pointer-events: none;          /* 關閉時不允許點擊 */
+  }
+
+  nav.open {
+    transform: translateY(0);      /* 滑下來 */
+    opacity: 1;                     /* 顯示 */
+    pointer-events: auto;           /* 可以點擊 */
+  }
+
+  nav a {
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0.5rem 0;
+  }
+}

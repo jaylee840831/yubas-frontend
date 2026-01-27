@@ -1,0 +1,23 @@
+<header>
+  <div class="container header-container">
+    <div class="logo" routerLink="/">YUBAS</div>
+
+    <!-- 漢堡按鈕（小螢幕顯示） -->
+    <button class="hamburger" (click)="toggleMenu()">
+      <span *ngIf="!menuOpen" class="material-icons">menu</span>
+      <span *ngIf="menuOpen" class="material-icons">close</span>
+    </button>
+
+    <!-- 導航欄（大螢幕顯示） -->
+    <nav [class.open]="menuOpen">
+      <a routerLink="/about" (click)="closeMenu()">關於我們</a>
+      <a routerLink="/fleet" (click)="closeMenu()">車隊專欄</a>
+      <a routerLink="/blog" (click)="closeMenu()">部落格</a>
+      <a routerLink="/faq" (click)="closeMenu()">常見問題</a>
+      <a routerLink="/login" (click)="closeMenu()" class="user-icon" aria-label="登入">
+        <span class="material-icons">account_circle</span>
+      </a>
+    </nav>
+  </div>
+</header>
+

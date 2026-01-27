@@ -1,0 +1,12 @@
+/* Footer */
+footer { 
+  background:#343a40; 
+  color:#fff; 
+  text-align:center; 
+  padding:0.5rem 0; 
+  position: fixed;  /* 固定在視窗底部 */
+  bottom: 0;        /* 底部對齊 */
+  left: 0;
+  width: 100%;      /* 滿寬 */
+  z-index: 1001;     /* 確保在最上層 */
+}

@@ -1,0 +1,187 @@
+/* Main Grid */
+main {
+  background-color: rgba(0,0,0,0.9);
+  min-height:calc(100vh - 140px); 
+  padding:10px 0;
+  margin: 35% 0 30px 0;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 320px));
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.step-grid-container{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 每行 4 個，平均分配寬度 */
+  gap: 2rem;  
+  justify-content: center;
+}
+
+.arrow-card{
+  position: relative;      /* 讓偽元素相對於父元素定位 */
+  display: inline-block;   /* 或 block，依需求 */
+}
+
+.arrow-card::after {
+  content: "";
+  position: absolute;
+  right: -30px;             /* 右側距離 */
+  top: 50%;                /* 垂直置中 */
+  transform: translateY(-50%); /* 真正置中 */
+  animation: arrowMove 2s infinite linear;
+  z-index: 1000;
+
+  width: 48px;
+  height: 48px;
+  background-image: url('/arrow_right_48.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+@keyframes arrowMove {
+  0%, 50%, 100% { transform: translateY(-50%) translateX(0); }
+  25% { transform: translateY(-50%) translateX(20px); }
+}
+
+.section-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 3rem 0 10px 0;
+  text-align: left;
+  color: gold;
+}
+
+.content-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* 水平置中 */
+  align-items: center;
+  margin: 3rem 0 10px 0;
+}
+
+.content-container button{
+  padding: 1rem 5rem 1rem 5rem;
+  border-radius: 30px;
+  background: goldenrod;
+  cursor:pointer;
+}
+
+.content-title{
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.content{
+  font-size: 20px;
+  color: lightgray;
+  white-space: pre-line;
+  text-align: center; 
+}
+
+.circle-image{
+  width: 100px !important;
+  height: 100px !important;
+  border-radius: 50% !important;
+  margin: 0 auto !important;
+}
+
+.card { 
+  background-color: rgba(0,0,0,0.7); 
+  padding:1rem; 
+  border-radius:6px; 
+  border: 1px white solid; 
+  transition:transform .2s; 
+}
+
+.card:hover { 
+  transform:translateY(-5px);
+ }
+
+.card button { 
+  margin-top:1rem; 
+  padding:.5rem 1rem; 
+  background:#007bff; 
+  border:none; 
+  border-radius:4px; 
+  cursor:pointer;
+ }
+
+.card button:hover { 
+  background:#0056b3; 
+}
+
+.card p{
+  color: rgb(181, 184, 255);
+}
+
+.card-image{
+  width: 100%;
+  aspect-ratio: 16 / 9;  /* 控制卡片圖片比例 */
+  overflow: hidden;     /* 裁切超出部分 */
+  border-radius: 6px 6px 0 0;
+}
+
+.card-image img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;    /* 填滿不變形 */
+  display: block;
+}
+
+@media (max-width: 1025px) {
+  main { 
+    min-height:calc(100vh - 140px); 
+    padding:10px 0;
+    margin: 250px 0 30px 0;
+  }
+
+  .step-grid-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 320px));
+    gap: 1.5rem;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 752px) {
+  .arrow-card{
+    position: relative;      /* 讓偽元素相對於父元素定位 */
+    display: inline-block;   /* 或 block，依需求 */
+  }
+
+  .arrow-card::after {
+    content: "";
+    position: absolute;
+    top: 90%;       
+    right: 35%;       
+    transform: translateX(-50%);
+    animation: arrowMoveDown 2s infinite linear;
+    z-index: 1000;
+
+    width: 48px;
+    height: 48px;
+    background-image: url('/arrow_down_48.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  @keyframes arrowMoveDown {
+    0%, 50%, 100% { transform: translateX(-50%) translateY(0); }
+    25% { transform: translateX(-50%) translateY(20px); }
+  }
+
+  .content-title{
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  .content{
+    font-size: 18px;
+    color: lightgray;
+  }
+}

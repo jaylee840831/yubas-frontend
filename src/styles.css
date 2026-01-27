@@ -14,14 +14,9 @@ body, html {
 body {
   background-image: url('https://static.wixstatic.com/media/9e5814_c78dcc6e1b134167a2fa78c762b744c7~mv2.png/v1/crop/x_0,y_137,w_1521,h_750,q_90,usm_0.66_1.00_0.01,enc_auto/9e5814_c78dcc6e1b134167a2fa78c762b744c7~mv2.png');
   background-size:cover;
-  background-position: left center;
+  background-position: top center;
   background-repeat: no-repeat;
   background-attachment: fixed; /* 滾動時背景固定 */
-}
-
-a {
-  text-decoration: none;
-  color: inherit; /* 保留文字顏色 */
 }
 
 /* Container */
@@ -31,46 +26,9 @@ a {
   margin:0 auto;
 }
 
-header{
-  width: 100%;
-  background-color: rgba(0,0,0,0.7);
-  color: white;
-  position: fixed;   /* ✅ 固定在畫面頂端 */
-  top: 0;            /* 從頂部開始 */
-  left: 0;
-  z-index: 1000;     /* 確保在最上層 */
-}
-
-/* Header 容器 */
-.header-container {
-  display: flex;
-  justify-content: space-between; /* 左右兩端對齊 */
-  align-items: center;            /* 垂直置中 */
-  padding: 1rem 0;
-  position: relative;
-}
-
-/* Logo */
-.header-container .logo {
-  font-size: 2rem;
-  font-weight: bold;
-}
-
-.hamburger {
-  display: none; /* 大螢幕隱藏 */
-  background: none;
-  border: none;
-  font-size: 2rem;      /* icon 大小 */
-  color: #fff;           /* icon 顏色 */
-}
-.hamburger span {
-  line-height: 1;
-}
-
-/* 導航欄 */
-nav {
-  display: flex;
-  gap: 1rem;
+a {
+  text-decoration: none;
+  color: inherit; /* 保留文字顏色 */
 }
 
 .line-clamp-1{
@@ -89,39 +47,6 @@ nav {
   overflow: hidden;
 }
 
-.card { background-color: rgba(0,0,0,0.7); padding:1rem; border-radius:6px; border: 1px white solid; transition:transform .2s; }
-.card:hover { transform:translateY(-5px); }
-.card button { margin-top:1rem; padding:.5rem 1rem; background:#007bff; border:none; border-radius:4px; cursor:pointer; }
-.card button:hover { background:#0056b3; }
-.card p{
-  color: rgb(181, 184, 255);
-}
-.card-image{
-  width: 100%;
-  aspect-ratio: 16 / 9;  /* 控制卡片圖片比例 */
-  overflow: hidden;     /* 裁切超出部分 */
-  border-radius: 6px 6px 0 0;
-}
-.card-image img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;    /* 填滿不變形 */
-  display: block;
-}
-
-/* Footer */
-footer { 
-  background:#343a40; 
-  color:#fff; 
-  text-align:center; 
-  padding:0.5rem 0; 
-  position: fixed;  /* 固定在視窗底部 */
-  bottom: 0;        /* 底部對齊 */
-  left: 0;
-  width: 100%;      /* 滿寬 */
-  z-index: 1000;     /* 確保在最上層 */
-}
-
 @media (max-width: 1025px) {
   /* 背景圖 */
   body {
@@ -129,59 +54,5 @@ footer {
     background-size:contain;
     background-repeat: repeat;
     background-attachment: fixed; /* 滾動時背景固定 */
-  }
-
-  /* Logo */
-  .header-container .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-}
-
-/* 小螢幕 RWD */
-@media (max-width: 768px) {
-  .hamburger {
-    display: flex;          /* 小螢幕顯示漢堡 */
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 1001;
-  }
-
-  .hamburger span{
-    width: 30px;
-    background: black;
-    border-radius: 5px;
-  }
-
-  nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: black;
-    padding: 2rem 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    z-index: 1000; 
-
-    /* 初始隱藏 */
-    transform: translateY(-100%); /* 從上方滑入 */
-    opacity: 0;                   /* 透明 */
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    pointer-events: none;          /* 關閉時不允許點擊 */
-  }
-
-  nav.open {
-    transform: translateY(0);      /* 滑下來 */
-    opacity: 1;                     /* 顯示 */
-    pointer-events: auto;           /* 可以點擊 */
-  }
-
-  nav a {
-    text-decoration: none;
-    font-weight: bold;
-    padding: 0.5rem 0;
   }
 }

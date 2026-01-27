@@ -2,6 +2,8 @@
   "name": "yubas-frontend",
   "version": "0.0.0",
   "scripts": {
+    "build:gh": "ng build --configuration production --base-href /yubas-frontend/",
+    "deploy:gh": "npx angular-cli-ghpages --dir=dist/yubas-frontend/browser",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
