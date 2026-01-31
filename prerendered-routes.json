@@ -1,0 +1,12 @@
+{
+  "routes": {
+    "/yubas-frontend": {},
+    "/yubas-frontend/about": {},
+    "/yubas-frontend/blog/fleet": {},
+    "/yubas-frontend/blog/trip": {},
+    "/yubas-frontend/business": {},
+    "/yubas-frontend/campaign": {},
+    "/yubas-frontend/faq": {},
+    "/yubas-frontend/login": {}
+  }
+}
