@@ -49,34 +49,6 @@ main {
   display: block;
 }
 
-.arrow-card{
-  position: relative;      /* 讓偽元素相對於父元素定位 */
-  display: inline-block;   /* 或 block，依需求 */
-}
-
-/* 卡片的箭頭圖案 */
-/* .arrow-card::after {
-  content: "";
-  position: absolute;
-  right: -30px;
-  top: 50%;
-  transform: translateY(-50%);
-  animation: arrowMove 2s infinite linear;
-  z-index: 1000;
-
-  width: 48px;
-  height: 48px;
-  background-image: url('assets/arrow_right_48.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-@keyframes arrowMove {
-  0%, 50%, 100% { transform: translateY(-50%) translateX(0); }
-  25% { transform: translateY(-50%) translateX(20px); }
-} */
-
 /* 章節標題 */
 .section-title {
   margin: 3rem 0 10px 0;
@@ -154,32 +126,5 @@ main {
     max-width: 100%;
     height: auto;
     border-radius: 15px;
-  }
-
-  .arrow-card{
-    position: relative;      /* 讓偽元素相對於父元素定位 */
-    display: inline-block;   /* 或 block，依需求 */
-  }
-
-  .arrow-card::after {
-    content: "";
-    position: absolute;
-    top: 90%;       
-    right: 35%;       
-    transform: translateX(-50%);
-    animation: arrowMoveDown 2s infinite linear;
-    z-index: 1000;
-
-    width: 48px;
-    height: 48px;
-    background-image: url('assets/arrow_down_48.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-
-  @keyframes arrowMoveDown {
-    0%, 50%, 100% { transform: translateX(-50%) translateY(0); }
-    25% { transform: translateX(-50%) translateY(20px); }
   }
 }
