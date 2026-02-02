@@ -1,5 +1,42 @@
 <footer>
+  <!-- 聯絡方式 -->
+  <div class="container contact-information-container">
+    <div class="contact-information">
+      <div style="display: flex; align-items: center;">
+        <img src="assets/logo.avif" class="logo-image">
+        <div>
+          <p style="color: goldenrod;">
+            24小時專人在線客服
+          </p>
+          <button
+            (click)="go_to_line_call()"
+            style="background:#00BB00; border-radius: 8px; padding: 10px 12px; cursor: pointer; margin-left: 10px;">
+              LINE@免付費客服通話
+          </button>
+          <p>
+            E-mail: jack21123@gmail.com
+          </p>
+          <p>
+            全興來樂企業社  (統編: 02431976)
+          </p>
+          <p>
+            地址: 臺北市大安區四維路190號
+          </p>
+          <a routerLink="/about">
+            隱私權政策＆使用條款
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="contact-information grid-5-container">
+      <img src="assets/line.avif" (click)="go_to_line()" class="social-media-image">
+      <img src="assets/fb.avif" (click)="go_to_fb()" class="social-media-image">
+      <img src="assets/ig.avif" (click)="go_to_ig()" class="social-media-image">
+      <img src="assets/yt.avif" (click)="go_to_youtube()" class="social-media-image">
+      <img src="assets/google.avif" (click)="go_to_google()" class="social-media-image">
+    </div>
+  </div>
   <div class="container">
-    &copy; COPYRIGHT © 2026 All Rights Reserved by YUBAS 機場接送
+    <p>&copy; COPYRIGHT © 2026 All Rights Reserved by YUBAS 機場接送</p>
   </div>
 </footer>

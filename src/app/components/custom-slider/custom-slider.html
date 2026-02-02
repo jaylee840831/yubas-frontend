@@ -1,0 +1,13 @@
+<div class="slider-container">
+  <div
+    class="slide"
+    *ngFor="let slide of slides; let i = index"
+    [class.active]="i === currentIndex"
+  >
+    <ng-container *ngTemplateOutlet="templates[0]; context: { $implicit: slide }">
+    </ng-container>
+  </div>
+
+  <button *ngIf="arrowShow" class="arrow left" (click)="prev()">‹</button>
+  <button *ngIf="arrowShow" class="arrow right" (click)="next()">›</button>
+</div>

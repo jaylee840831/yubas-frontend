@@ -1,18 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, QueryList, TemplateRef, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { Slider } from '../../components/slider/slider';
+import { CustomSlider } from '../../components/custom-slider/custom-slider';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule, Slider, CustomSlider],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
-export class Home {
+export class Home implements AfterViewInit {
   cards = [
     { title: '用 LINE@ 就能預約', description: '預約不用另外下載任何APP，用LINE就能快速完成資料變更、快速報價、機場接送與其他接送、包車服務預約。', button: '加入LINE@' },
     { title: '全台四大機場接送服務', description: '我們提供桃園機場、松山機場、台中清泉崗和高雄小港機場 深夜尖峰時段皆不加價的接送預約服務。' , button:'線上預約'},
-    { title: '出發前 24H 自由取消', description: '您可以隨時自行按鈕取消預約，不用透過客服協助處哩，無條件退款已消費金額點數。', button: '預約注意事項' },
+    { title: '出發前 24H 自由取消', description: '您可以隨時自行按鈕取消預約，不用透過客服協助處哩，無條件退款已消費金額點數。', button: '預約注意事項' }
   ];
 
   newsCards = [
@@ -40,26 +43,72 @@ export class Home {
   ];
 
   reserveCards = [
-    { title: '步驟一 註冊實名會員',
+    { title: '1. 註冊實名會員',
       description: '登入會員專區成為YUBAS會員',
       imageUrl: 'https://static.wixstatic.com/media/9e5814_b8fa7df6849e46f78f6705696a939bf3~mv2.jpg/v1/crop/x_225,y_225,w_591,h_591/fill/w_200,h_200,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/9e5814_b8fa7df6849e46f78f6705696a939bf3~mv2.jpg'
     },
-    { title: '步驟二 填寫預約資料',
+    { title: '2. 填寫預約資料',
       description: '填寫接送地址時間及預約資訊',
       imageUrl:'https://static.wixstatic.com/media/9e5814_96b5e54651664d62ac89a784a36842bc~mv2.jpg/v1/crop/x_171,y_219,w_591,h_591/fill/w_200,h_200,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/%E6%B4%BB%E5%8B%95%20(2).jpg'
     },
-    { title: '步驟三 完成付費',
+    { title: '3. 完成付費',
       description: '線上轉帳付費確認預約訂單完成',
       imageUrl:'https://static.wixstatic.com/media/9e5814_aa149add03eb468ca1989ec03c85f51f~mv2.jpg/v1/crop/x_253,y_253,w_533,h_533/fill/w_200,h_200,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/%E6%B4%BB%E5%8B%95%20(3).jpg'
     },
-    { title: '步驟四 等候出發',
+    { title: '4. 等候出發',
       description: '出發前會有 LINE、SMS簡訊通知',
       imageUrl:'https://static.wixstatic.com/media/9e5814_ed4c70e1d62a4e4190698f28993ad9f0~mv2.jpg/v1/crop/x_189,y_189,w_662,h_662/fill/w_200,h_200,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/%E6%B4%BB%E5%8B%95.jpg'
     },
   ];
 
-  textContent = `YUBAS 提供 五人座、七人座、九人座 多種車型選擇，
-  個人出行、家庭旅遊，或多人團體行程，都能依實際人數與行李需求彈性安排。
-  所有車輛皆定期保養、內裝整潔，並經由審核之專業駕駛服務，
-  行程事前報價清楚透明，讓每一趟移動都舒適、安全且無後顧之憂。`;
+serviceCards = [
+  {
+    title:'機場接送',
+    description:`出發桃園機場、松山機場、清泉崗機場、高雄小港機場。AI 智慧報價，深夜凌晨不加價。`,
+    imageUrl:'assets/service1.avif'
+  },
+    {
+    title:'市區接駁',
+    description:`專業市區接駁服務：全台高鐵站、火車站及港口接送。 支援商務接送與大件行李搬運。`,
+    imageUrl:'assets/service2.avif'
+  },
+  {
+    title:'包車服務',
+    description:`客製化包車服務：提供多小時/多天台灣旅遊包車、商務考察與彈性用車。`,
+    imageUrl:'assets/service3.avif'
+  }
+];
+
+  serviceSlideTitle = `​機場接送・市區接駁・包車服務｜YUBAS智慧叫車平台`;
+
+  serviceSlideSubtitle = `YUBAS 提供機場接送、市區接駁與包車服務，支援多元用車情境與彈性預約需求。
+不論是往返機場、跨區移動或整日包車行程，皆可事前報價、清楚透明。
+平台整合專業駕駛與智慧媒合系統，確保行程準時、安全與服務品質，
+讓每一次移動都更省時、省心，也更有保障`;
+
+  serviceSlides = [
+    {
+      title: '',
+      subtitle: '',
+      image: 'assets/service4.avif'
+    },
+    {
+      title: '',
+      subtitle: '',
+      image: 'assets/service5.avif'
+    },
+    {
+      title: '',
+      subtitle: '',
+      image: 'assets/service6.avif'
+    }
+  ];
+  
+  @ViewChild('serviceSlide', { static: true }) slideTpl!: TemplateRef<any>;
+
+  slideTemplates: TemplateRef<any>[] = [];
+
+  ngAfterViewInit() {
+    this.slideTemplates = [this.slideTpl];
+  }
 }

@@ -1,7 +1,7 @@
 <main>
   <div class="container grid-container">
     <div class="card" *ngFor="let card of cards">
-      <h3>{{ card.title }}</h3>
+      <h5>{{ card.title }}</h5>
       <p>{{ card.description }}</p>
       <button>{{ card.button }}</button>
     </div>
@@ -9,14 +9,14 @@
 
   <!-- 最新消息 -->
   <div class="container">
-    <p class="section-title">最新消息</p>
+    <h4 class="section-title">最新消息</h4>
     <div class="grid-container">
       <div class="card" *ngFor="let news of newsCards">
         <div class="card-image">
           <img [src]="news.imageUrl" [alt]="news.title">
         </div>
         <div class="line-clamp-1">
-          <h3>{{ news.title }}</h3>
+          <h5>{{ news.title }}</h5>
         </div>
         <div class="line-clamp-3">
           <p>{{ news.description }}</p>
@@ -27,39 +27,76 @@
 
   <!-- 預約流程 -->
   <div class="container">
-    <p class="section-title">預約流程</p>
-    <div class="step-grid-container">
+    <h4 class="section-title">預約流程</h4>
+    <div class="grid-4-container">
       <div class="card" *ngFor="let reserve of reserveCards let last = last" [ngClass]="{'arrow-card': !last}">
         <div class="card-image circle-image">
           <img [src]="reserve.imageUrl" [alt]="reserve.title">
         </div>
         <div style="display: flex; justify-content: center; align-items: center;">
-          <h3>{{ reserve.title }}</h3>
+          <h5>{{ reserve.title }}</h5>
         </div>
         <div style="display: flex; justify-content: center; align-items: center;">
-          <h4>{{ reserve.description }}</h4>
+          <p>{{ reserve.description }}</p>
         </div>
       </div>
     </div>
     <div class="content-container">
-      <div class="content-title">輸入姓名、電話 註冊預約最高享 10% 回饋</div>
+      <h5 style="color: rgb(181, 184, 255);">註冊會員預約最高享 10% 回饋</h5>
       <br>
-      <button>
-        <h2>註冊會員</h2>
-      </button>
+      <button><h5>註冊會員</h5></button>
     </div>
   </div>
 
-    <!-- 服務車型 -->
+  <!-- 服務車型 -->
   <div class="container">
-    <p class="section-title">服務車型</p>
+    <h4 class="section-title">服務車型</h4>
+    <app-slider></app-slider>
+  </div>
+
+  <!-- 服務項目slide template -->
+  <ng-template #serviceSlide let-data>
+    <img [src]="data.image" alt="{{ data.title }}">
+  </ng-template>
+
+  <!-- 服務項目 -->
+  <div class="container">
+    <h4 class="section-title">服務項目</h4>
+    <div class="content-container slideTemplate">
+      <app-custom-slider
+        [arrowShow]="false"
+        [slides]="serviceSlides"
+        [templates]="[serviceSlide]">
+      </app-custom-slider>
+    </div>
     <div class="content-container">
-      <div class="content-title">多元車型選擇，依人數與行程靈活安排</div>
-      <br><br>
-      <div class="content">
-        {{ textContent }}
+      <h4>
+        {{ serviceSlideTitle }}
+      </h4>
+      <br>
+      <h5 style="font-weight: normal !important; color: lightgray;">
+        {{ serviceSlideSubtitle }}
+      </h5>
+    </div>
+    <div class="grid-container">
+      <div class="card" *ngFor="let service of serviceCards" style="background: #0B2F5B;">
+        <div class="card-image">
+          <img [src]="service.imageUrl" [alt]="service.title">
+        </div>
+        <div class="line-clamp-1">
+          <h5>{{ service.title }}</h5>
+        </div>
+        <div class="line-clamp-3">
+          <p>{{ service.description }}</p>
+        </div>
       </div>
-      <br><br>
+    </div>
+    <div class="content-container">
+      <h5 style="color: rgb(181, 184, 255);">
+        預約輸入【 YUBS88 】優惠碼 車資立刻省 $88元
+      </h5>
+      <br>
+      <button><h5>線上預約</h5></button>
     </div>
   </div>
 </main>

@@ -19,7 +19,7 @@ header{
 
 /* Logo */
 .header-container .logo {
-  font-size: 2rem;
+  font-size: 2.25rem;
   font-weight: bold;
   cursor: pointer;
 }
@@ -41,17 +41,76 @@ nav {
   gap: 1rem;
 }
 
-@media (max-width: 1025px) {
-  /* Logo */
-  .header-container .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    cursor: pointer;
+.user-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.user-icon .material-icons {
+  font-size: 24px;
+  line-height: 1;
+}
+
+/* 父層選單 */
+.menu-item {
+  position: relative;
+}
+
+/* 子選單 */
+.submenu {
+  position: absolute;
+  top: 100%;              /* 貼在父層底下 */
+  left: 0;
+  min-width: 180px;
+
+  background: #000;
+  border-radius: 6px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 1000;
+}
+
+/* 展開狀態 */
+.submenu.open {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* 子選單連結 */
+.submenu a {
+  display: block;
+  padding: 0.75rem 1rem;
+  white-space: nowrap;
+}
+
+@media (min-width: 1024px) {
+  .has-submenu:hover .submenu {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
   }
 }
 
-/* 小螢幕 RWD */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
+  /* Logo */
+  .header-container .logo {
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
   .hamburger {
     display: flex;          /* 小螢幕顯示漢堡 */
     align-items: center;
@@ -64,6 +123,31 @@ nav {
     width: 30px;
     background: black;
     border-radius: 5px;
+  }
+
+  .submenu {
+    position: static;          /* 關鍵：回到正常文件流 */
+    min-width: 100%;
+    box-shadow: none;
+    border-radius: 0;
+
+    opacity: 1;                /* 不用透明控制 */
+    transform: none;
+    pointer-events: auto;
+
+    max-height: 0;             /* 收起 */
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .submenu.open {
+    max-height: 500px;         /* 足夠容納子選單 */
+  }
+
+  .submenu a {
+    padding-left: 1.5rem;      /* 視覺縮排 */
+    font-size: 0.95rem;
+    opacity: 0.9;
   }
 
   nav {
@@ -93,7 +177,6 @@ nav {
 
   nav a {
     text-decoration: none;
-    font-weight: bold;
     padding: 0.5rem 0;
   }
 }

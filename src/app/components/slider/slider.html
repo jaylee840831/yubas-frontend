@@ -1,0 +1,45 @@
+<div
+  class="slider-container"
+  (mouseenter)="pause()"
+  (mouseleave)="resume()"
+  (touchstart)="onTouchStart($event)"
+  (touchmove)="onTouchMove($event)"
+  (touchend)="onTouchEnd()"
+>
+  <!-- 左箭頭 -->
+  <button class="arrow left" (click)="prevSlide()">‹</button>
+
+  <!-- 幻燈片 -->
+  <div
+    class="slide"
+    *ngFor="let slide of slides; let i = index"
+    [class.active]="i === currentIndex"
+  >
+   <div style="display: flex; flex-wrap: wrap-reverse; justify-content: center;">
+     <div class="center-column-container">
+      <div
+        class="column"
+        *ngFor="let quote of slide.quotation_list; let j = index"
+      >
+        <div class="center-column-container">
+          <h5>{{ quote.location }}</h5>
+          <h5 style="color: rgb(181, 184, 255);">{{ quote.price }}</h5>
+        </div>
+      </div>
+     </div>
+     <div class="center-column-container">
+       <div class="title flex-between-container">
+         <h5>{{ slide.title }}</h5>
+         <div class="tag">
+           <p>{{ slide.subtitle }}</p>
+         </div>
+       </div>
+       <img [src]="slide.image" class="slide-image"/>
+     </div>
+   </div>
+  </div>
+
+  <!-- 右箭頭 -->
+  <button class="arrow right" (click)="nextSlide()">›</button>
+</div>
+

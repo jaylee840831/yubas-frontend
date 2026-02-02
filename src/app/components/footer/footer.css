@@ -1,12 +1,62 @@
 /* Footer */
 footer { 
   background:#343a40; 
-  color:#fff; 
+  font-size: 12px;
   text-align:center; 
   padding:0.5rem 0; 
-  position: fixed;  /* 固定在視窗底部 */
   bottom: 0;        /* 底部對齊 */
   left: 0;
   width: 100%;      /* 滿寬 */
-  z-index: 1001;     /* 確保在最上層 */
+}
+
+.contact-information-container{
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.contact-information{
+  padding: 0 0 1rem 0;
+}
+
+.contact-information p, a{
+  color: lightgray;
+  margin: 5px 0;
+}
+
+.contact-information a{
+  font-weight: bold;
+}
+
+.logo-image{
+  width: 80px !important;
+  height: 80px !important;
+  border-radius: 50% !important;
+  margin: 0 auto !important;
+}
+
+.social-media-image{
+  width: 35px !important;
+  height: 35px !important;
+  border-radius: 50% !important;
+  margin: 0 auto !important;
+  cursor: pointer;
+  background: white;
+}
+
+.grid-5-container{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  justify-content: center;
+}
+
+@media (max-width: 752px) {
+  .contact-information-container{
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    flex-wrap: wrap;
+  }
 }

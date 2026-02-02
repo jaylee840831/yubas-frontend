@@ -1,0 +1,29 @@
+.slider-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity .5s ease;
+}
+
+.slide.active {
+  opacity: 1;
+  position: relative;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 48px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.left { left: 10px; }
+.right { right: 10px; }
