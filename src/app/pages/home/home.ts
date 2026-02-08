@@ -12,10 +12,23 @@ import { CustomSlider } from '../../components/custom-slider/custom-slider';
   styleUrl: './home.css',
 })
 export class Home implements AfterViewInit {
+  handleClick(link:string){
+    console.log(link)
+    if(link === 'line'){
+      window.open('https://page.line.me/yubas', '_blank');
+    }
+    if(link === 'order'){
+      alert('order');
+    }
+    if(link === 'notice'){
+      alert('notice');
+    }
+  }
+
   cards = [
-    { title: '用 LINE@ 就能預約', description: '預約不用另外下載任何APP，用LINE就能快速完成資料變更、快速報價、機場接送與其他接送、包車服務預約。', button: '加入LINE@' },
-    { title: '全台四大機場接送服務', description: '我們提供桃園機場、松山機場、台中清泉崗和高雄小港機場 深夜尖峰時段皆不加價的接送預約服務。' , button:'線上預約'},
-    { title: '出發前 24H 自由取消', description: '您可以隨時自行按鈕取消預約，不用透過客服協助處哩，無條件退款已消費金額點數。', button: '預約注意事項' }
+    { title: '用 LINE@ 就能預約', description: '預約不用另外下載任何APP，用LINE就能快速完成資料變更、快速報價、機場接送與其他接送、包車服務預約。', button: '加入LINE@', link:'line' },
+    { title: '全台四大機場接送服務', description: '我們提供桃園機場、松山機場、台中清泉崗和高雄小港機場 深夜尖峰時段皆不加價的接送預約服務。' , button:'線上預約', link:'order'},
+    { title: '出發前 24H 自由取消', description: '您可以隨時自行按鈕取消預約，不用透過客服協助處哩，無條件退款已消費金額點數。', button: '預約注意事項', link:'notice' }
   ];
 
   newsCards = [

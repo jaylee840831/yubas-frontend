@@ -1,5 +1,5 @@
-/* Main Grid */
-main {
+/* .main-container Grid */
+.main-container {
   background-color: rgba(0,0,0,0.9);
   min-height:calc(100vh - 140px); 
   padding:10px 0;
@@ -10,26 +10,15 @@ main {
   background-color: rgba(0,0,0,0.7); 
   padding:1rem; 
   border-radius:6px; 
-  border: 1px gray solid; 
-  /* transition:transform .2s;  */
+  border: 1px gray solid;
 }
 
-/* .card:hover { 
-  transform:translateY(-5px);
- } */
-
-.card button { 
+.card button {
+  padding:0.5rem 1rem; 
+  border-radius: 4px;
+  background:#007bff;
   margin-top:1rem; 
-  padding:.5rem 1rem; 
-  background:#007bff; 
-  border:none; 
-  border-radius:4px; 
-  cursor:pointer;
  }
-
-.card button:hover { 
-  background:#0056b3; 
-}
 
 .card p{
   color: rgb(181, 184, 255);
@@ -70,7 +59,6 @@ main {
   padding: 1rem 5rem 1rem 5rem;
   border-radius: 30px;
   background: goldenrod;
-  cursor:pointer;
 }
 
 .grid-container {
@@ -101,7 +89,7 @@ main {
 }
 
 @media (max-width: 1024px) {
-  main { 
+  .main-container { 
     min-height:calc(100vh - 140px); 
     padding:10px 0;
     margin: 450px 0 0 0;
@@ -116,7 +104,7 @@ main {
 }
 
 @media (max-width: 752px) {
-  main { 
+  .main-container { 
     min-height:calc(100vh - 140px); 
     padding:10px 0;
     margin: 300px 0 0 0;

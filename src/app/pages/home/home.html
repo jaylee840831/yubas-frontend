@@ -1,9 +1,9 @@
-<main>
+<div class="main-container">
   <div class="container grid-container">
     <div class="card" *ngFor="let card of cards">
       <h5>{{ card.title }}</h5>
       <p>{{ card.description }}</p>
-      <button>{{ card.button }}</button>
+      <button (click)="handleClick(card.link)">{{ card.button }}</button>
     </div>
   </div>
 
@@ -99,4 +99,4 @@
       <button><h5>線上預約</h5></button>
     </div>
   </div>
-</main>
+</div>
