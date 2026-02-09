@@ -1,19 +1,21 @@
-import { Component, ViewChild, QueryList, TemplateRef, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, TemplateRef, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Slider } from '../../components/slider/slider';
 import { CustomSlider } from '../../components/custom-slider/custom-slider';
+import { DialogService } from '../../service/dialog-service'
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule, Slider, CustomSlider],
+  imports: [ CommonModule, RouterModule, Slider, CustomSlider ],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
 export class Home implements AfterViewInit {
+  constructor(private dialogService: DialogService) {}
+
   handleClick(link:string){
-    console.log(link)
     if(link === 'line'){
       window.open('https://page.line.me/yubas', '_blank');
     }
@@ -21,7 +23,10 @@ export class Home implements AfterViewInit {
       alert('order');
     }
     if(link === 'notice'){
-      alert('notice');
+      this.dialogService.orderNoticeDialog().subscribe(result => {
+        if (result) {
+        }
+      });
     }
   }
 

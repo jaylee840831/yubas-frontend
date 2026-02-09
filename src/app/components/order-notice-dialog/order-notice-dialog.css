@@ -1,0 +1,72 @@
+.dialog-header {
+	display: flex; 
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 16px 24px;
+}
+
+.main-title {
+	color: gold;
+  font-weight: 600;
+}
+
+.dialog-content {
+	flex: 1;
+	overflow-y: auto;
+	max-height: 100%;
+}
+
+.tab-grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+	padding: 16px;
+}
+
+.tab-grid h5{
+	color: rgb(181, 184, 255);
+}
+
+.tab-label{
+}
+
+.tab-body {
+}
+
+.tab-body p{
+	max-width: 80ch;
+	font-size: 16px;
+}
+
+:host ::ng-deep .mat-mdc-tab.mdc-tab--active .tab-label {
+  color: gold;
+}
+
+:host ::ng-deep
+.mdc-tab--active
+.mdc-tab-indicator__content--underline {
+  border-color: gold !important;
+}
+
+:host ::ng-deep
+.mat-mdc-tab:hover .mdc-tab-indicator__content--underline {
+  border-color: gold !important;
+}
+
+/* .dialog-actions {
+} */
+
+@media (max-width: 752px) {
+	.tab-grid-container {
+		display: grid;
+		grid-template-columns: repeat(1, 1fr);
+		gap: 1.5rem;
+		padding: 16px;
+		border: 1px lightgray solid;
+		border-radius: 1rem;
+	}
+
+	.tab-label:not(:first-child){
+		margin-top: 1.5rem;
+	}
+}
