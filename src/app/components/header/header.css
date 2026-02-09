@@ -41,6 +41,18 @@ nav {
   gap: 1rem;
 }
 
+nav a.active {
+  color: gold;
+}
+
+nav a.active span {
+  color: gold;
+}
+
+.menu-item.active-parent > .user-icon span {
+  color: gold;
+}
+
 .user-icon {
   display: inline-flex;
   align-items: center;
@@ -126,16 +138,16 @@ nav {
   }
 
   .submenu {
-    position: static;          /* 關鍵：回到正常文件流 */
+    position: static;
     min-width: 100%;
     box-shadow: none;
     border-radius: 0;
 
-    opacity: 1;                /* 不用透明控制 */
+    opacity: 1;
     transform: none;
     pointer-events: auto;
 
-    max-height: 0;             /* 收起 */
+    max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease;
   }
@@ -159,7 +171,6 @@ nav {
     padding: 2rem 1rem;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
     z-index: 1000; 
 
     /* 初始隱藏 */
@@ -177,6 +188,5 @@ nav {
 
   nav a {
     text-decoration: none;
-    padding: 0.5rem 0;
   }
 }

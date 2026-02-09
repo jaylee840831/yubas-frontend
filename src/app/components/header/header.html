@@ -10,12 +10,12 @@
 
     <!-- 導航欄（大螢幕顯示） -->
     <nav [class.open]="menuOpen">
-      <a routerLink="/about" (click)="closeMenuAll()">關於我們</a>
-      <a routerLink="/campaign" (click)="closeMenuAll()">活動公告</a>
+      <a routerLinkActive="active" routerLink="/about" (click)="closeMenuAll()">關於我們</a>
+      <a routerLinkActive="active" routerLink="/campaign" (click)="closeMenuAll()">活動公告</a>
 
       <!-- 商業合作子選單 -->
-      <div class="menu-item has-submenu" #businessMenu>
-        <span class="user-icon" style="background: black;" (click)="toggleBusinessMenu($event)">
+      <div class="menu-item has-submenu" #businessMenu routerLinkActive="active-parent">
+        <span class="user-icon" (click)="toggleBusinessMenu($event)">
           <span>商業合作</span>
           <span class="material-icons">
             {{ businessMenuOpen ? 'expand_less' : 'expand_more' }}
@@ -23,14 +23,14 @@
         </span>
 
         <div class="submenu" [class.open]="businessMenuOpen">
-          <a routerLink="/business/company" (click)="closeMenuAll()">企業包車</a>
-          <a routerLink="/business/partner" (click)="closeMenuAll()">夥伴招募</a>
+          <a routerLinkActive="active" routerLink="/business/company" (click)="closeMenuAll()">企業包車</a>
+          <a routerLinkActive="active" routerLink="/business/partner" (click)="closeMenuAll()">夥伴招募</a>
         </div>
       </div>
 
       <!-- 部落格子選單 -->
-      <div class="menu-item has-submenu" #blogMenu>
-        <span class="user-icon" style="background: black;" (click)="toggleBlogMenu($event)">
+      <div class="menu-item has-submenu" #blogMenu routerLinkActive="active-parent">
+        <span class="user-icon" (click)="toggleBlogMenu($event)">
           <span>部落格</span>
           <span class="material-icons">
             {{ blogMenuOpen ? 'expand_less' : 'expand_more' }}
@@ -38,14 +38,14 @@
         </span>
 
         <div class="submenu" [class.open]="blogMenuOpen">
-          <a routerLink="/blog/fleet" (click)="closeMenuAll()">車隊專欄</a>
-          <a routerLink="/blog/trip" (click)="closeMenuAll()">旅遊推薦</a>
+          <a routerLinkActive="active" routerLink="/blog/fleet" (click)="closeMenuAll()">車隊專欄</a>
+          <a routerLinkActive="active" routerLink="/blog/trip" (click)="closeMenuAll()">旅遊推薦</a>
         </div>
       </div>
 
-      <a routerLink="/shop" (click)="closeMenuAll()">購物商城</a>
-      <a routerLink="/faq" (click)="closeMenuAll()">常見問題</a>
-      <a routerLink="/login" (click)="closeMenuAll()" class="user-icon" aria-label="登入">
+      <a routerLinkActive="active" routerLink="/shop" (click)="closeMenuAll()">購物商城</a>
+      <a routerLinkActive="active" routerLink="/faq" (click)="closeMenuAll()">常見問題</a>
+      <a routerLinkActive="active" routerLink="/login" (click)="closeMenuAll()" class="user-icon" aria-label="登入">
         <span>會員登入</span>
         <span class="material-icons">account_circle</span>
       </a>

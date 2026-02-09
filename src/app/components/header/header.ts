@@ -26,8 +26,8 @@ export class Header {
     this.blogMenuOpen = !this.blogMenuOpen;
   }
 
-  toggleBusinessMenu(e: Event) {
-    e.stopPropagation();
+  toggleBusinessMenu(event: Event) {
+    event.stopPropagation();
     this.businessMenuOpen = !this.businessMenuOpen;
   }
 
