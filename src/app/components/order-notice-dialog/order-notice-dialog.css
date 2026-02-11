@@ -6,7 +6,6 @@
 }
 
 .main-title {
-	color: gold;
   font-weight: 600;
 }
 
@@ -23,7 +22,7 @@
 	padding: 16px;
 }
 
-.tab-grid h5{
+.tab-grid p{
 	color: rgb(181, 184, 255);
 }
 
@@ -38,7 +37,11 @@
 	font-size: 16px;
 }
 
-:host ::ng-deep .mat-mdc-tab.mdc-tab--active .tab-label {
+:host ::ng-deep .mat-mdc-tab.mdc-tab--active span {
+  color: gold;
+}
+
+:host ::ng-deep .mat-mdc-tab.mdc-tab--active h5 {
   color: gold;
 }
 
@@ -67,6 +70,19 @@
 	}
 
 	.tab-label:not(:first-child){
-		margin-top: 1.5rem;
+		margin-top: 3rem;
+	}
+
+	.tab-label{
+		display: flex;
+		flex-direction: row;
+	}
+
+	.tab-label span{
+		color: gold;
+	}
+
+	.tab-label h5{
+		color: gold;
 	}
 }

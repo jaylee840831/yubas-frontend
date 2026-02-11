@@ -12,10 +12,10 @@ import { MatTabsModule } from '@angular/material/tabs';
   styleUrl: './order-notice-dialog.css',
 })
 export class OrderNoticeDialog {
-  isMobile = window.innerWidth < 752;
+  isMobile = window.innerWidth <= 752;
 
   @HostListener('window:resize')
   onResize() {
-    this.isMobile = window.innerWidth < 752;
+    this.isMobile = window.innerWidth <= 752;
   }
 }

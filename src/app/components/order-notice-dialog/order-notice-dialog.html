@@ -11,7 +11,10 @@
 		<mat-tab-group>
 			<mat-tab>
 				<ng-template mat-tab-label>
-					<h5 class="tab-label">費用說明</h5>
+					<span class="material-icons">
+						attach_money
+					</span>
+					<h5>費用說明</h5>
 				</ng-template>
 				<div class="tab-body tab-grid-container">
 					<div class="tab-grid">
@@ -38,7 +41,10 @@
 			</mat-tab>
 			<mat-tab>
 				<ng-template mat-tab-label>
-					<h5 class="tab-label">等候說明</h5>
+          <span class="material-icons">
+						local_taxi
+					</span>
+					<h5>等候說明</h5>
 				</ng-template>
 				<div class="tab-body tab-grid-container">
 					<div class="tab-grid">
@@ -73,7 +79,10 @@
 			</mat-tab>
 			<mat-tab>
 				<ng-template mat-tab-label>
-					<h5 class="tab-label">服務承諾</h5>
+          <span class="material-icons">
+            handshake
+          </span>
+					<h5>服務承諾</h5>
 				</ng-template>
 				<div class="tab-body tab-grid-container">
 					<div class="tab-grid">
@@ -102,7 +111,12 @@
 	</ng-container>
 	<!-- 手機板 -->
 	<ng-container *ngIf="isMobile">
-		<h5 class="tab-label">費用說明</h5>
+    <div class="tab-label">
+      <span class="material-icons">
+        attach_money
+      </span>
+      <h5>費用說明</h5>
+    </div>
 		<div class="tab-body tab-grid-container">
 			<div class="tab-grid">
 				<h5>報價費用包含：</h5>
@@ -125,7 +139,12 @@
 				<p>為提供每一位乘客舒適整潔的乘車環境，搭車時應保持車內整潔。若您乘車時，不慎於車內打翻食物或不適嘔吐導致車內髒污，造成車輛內部或外部髒污，服務司機有權利向您酌收取清潔費 3,000 - 5,000 元不等的清潔費用。</p>
 			</div>
 		</div>
-		<h5 class="tab-label">等候說明</h5>
+    <div class="tab-label">
+      <span class="material-icons">
+        local_taxi
+      </span>
+		  <h5>等候說明</h5>
+    </div>
 		<div class="tab-body tab-grid-container">
 			<div class="tab-grid">
 				<h5>接機服務：</h5>
@@ -156,7 +175,12 @@
 				</p>
 			</div>
 		</div>
-		<h5 class="tab-label">服務承諾</h5>
+    <div class="tab-label">
+      <span class="material-icons">
+        handshake
+      </span>
+      <h5>服務承諾</h5>
+    </div>
 		<div class="tab-body tab-grid-container">
 			<div class="tab-grid">
 				<h5>專業守時 服務行程透明可追蹤</h5>

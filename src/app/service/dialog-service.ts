@@ -12,7 +12,7 @@ export class DialogService {
   // 線上預約注意事項
   orderNoticeDialog(): Observable<boolean> {
     const ref = this.dialog.open(OrderNoticeDialog, {
-      width: '90vw',
+      width: '70vw',
       maxWidth: '1200px',
       height: '90vh',
       maxHeight: '90vh',
