@@ -3,7 +3,7 @@
   background-color: rgba(0,0,0,0.9);
   min-height:calc(100vh - 140px); 
   padding:10px 0;
-  margin: 35% 0 0 0;
+  margin: 33% 0 0 0;
 }
 
 .card { 
@@ -88,11 +88,19 @@
   margin: 0 auto !important;
 }
 
+@media (max-width: 1280px) {
+  .main-container { 
+    min-height:calc(100vh - 140px); 
+    padding:10px 0;
+    margin: 600px 0 0 0;
+  }
+}
+
 @media (max-width: 1024px) {
   .main-container { 
     min-height:calc(100vh - 140px); 
     padding:10px 0;
-    margin: 450px 0 0 0;
+    margin: 400px 0 0 0;
   }
 
   .grid-4-container{
@@ -107,7 +115,7 @@
   .main-container { 
     min-height:calc(100vh - 140px); 
     padding:10px 0;
-    margin: 300px 0 0 0;
+    margin: 280px 0 0 0;
   }
 
   .slideTemplate img{

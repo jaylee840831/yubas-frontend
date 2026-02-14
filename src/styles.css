@@ -1,3 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 /* Reset & Base */
 * { 
   margin:0;
@@ -17,18 +22,6 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-}
-
-app-root {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-main{
-  flex: 1;
-  display: flex;
-  flex-direction: column;
 }
 
 /* 背景圖 */
@@ -170,7 +163,7 @@ a {
 @media (max-width: 1024px) {
   /* 背景圖 */
   body {
-    background-image: url('https://static.wixstatic.com/media/9e5814_c78dcc6e1b134167a2fa78c762b744c7~mv2.png/v1/crop/x_0,y_137,w_980,h_750,q_90,usm_0.66_1.00_0.01,enc_auto/9e5814_c78dcc6e1b134167a2fa78c762b744c7~mv2.png');
+    background-image: url('https://static.wixstatic.com/media/9e5814_c78dcc6e1b134167a2fa78c762b744c7~mv2.png/v1/crop/x_0,y_137,w_1521,h_750,q_90,usm_0.66_1.00_0.01,enc_auto/9e5814_c78dcc6e1b134167a2fa78c762b744c7~mv2.png');
     background-size:contain;
     background-repeat: repeat;
     background-attachment: fixed; /* 滾動時背景固定 */
@@ -184,6 +177,14 @@ a {
 }
 
 @media (max-width: 752px) {
+    /* 背景圖 */
+    body {
+      background-image: url('https://static.wixstatic.com/media/9e5814_c78dcc6e1b134167a2fa78c762b744c7~mv2.png/v1/crop/x_0,y_137,w_980,h_750,q_90,usm_0.66_1.00_0.01,enc_auto/9e5814_c78dcc6e1b134167a2fa78c762b744c7~mv2.png');
+      background-size:contain;
+      background-repeat: repeat;
+      background-attachment: fixed; /* 滾動時背景固定 */
+    }
+
   .arrow-card::after {
     content: "";
     position: absolute;

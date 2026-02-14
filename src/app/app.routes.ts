@@ -9,24 +9,38 @@ import { Partner } from './pages/partner/partner';
 import { Campaign } from './pages/campaign/campaign';
 import { Shop } from './pages/shop/shop';
 import { Login } from './pages/login/login';
+import { MainLayout } from './layouts/main-layout/main-layout';
+import { NoHeaderFooterLayout } from './layouts/no-header-footer-layout/no-header-footer-layout';
 import { NoContent } from './pages/no-content/no-content';
 
 export const routes: Routes = [
-    { path: '', component: Home },
-    { path: 'about', component: About },
-    { path: 'campaign', component: Campaign },
-    // { path: 'business/company', component: Business },
-    // { path: 'business/partner', component: Partner },
-    // { path: 'blog/fleet', component: Fleet },
-    // { path: 'blog/trip', component: Trip },
-    // { path: 'shop', component: Shop },
-    { path: 'faq', component: Faq },
-    { path: 'login', component: Login },
+    {
+        path: '',
+        component: MainLayout,
+        children: [
+            { path: '', component: Home },
+            { path: 'about', component: About },
+            { path: 'campaign', component: Campaign },
+            // { path: 'business/company', component: Business },
+            // { path: 'business/partner', component: Partner },
+            // { path: 'blog/fleet', component: Fleet },
+            // { path: 'blog/trip', component: Trip },
+            // { path: 'shop', component: Shop },
+            { path: 'faq', component: Faq },
 
-    // TODO: 待開發畫面
-    { path: 'business/company', component:  NoContent},
-    { path: 'business/partner', component: NoContent },
-    { path: 'blog/fleet', component: NoContent },
-    { path: 'blog/trip', component: NoContent },
-    { path: 'shop', component: NoContent }
+            // TODO: 待開發畫面
+            { path: 'business/company', component:  NoContent},
+            { path: 'business/partner', component: NoContent },
+            { path: 'blog/fleet', component: NoContent },
+            { path: 'blog/trip', component: NoContent },
+            { path: 'shop', component: NoContent }
+        ]
+    },
+    {
+        path: '',
+        component: NoHeaderFooterLayout,
+        children: [
+            { path: 'login', component: Login },
+        ]
+    }
 ];
