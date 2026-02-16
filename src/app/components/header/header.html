@@ -45,13 +45,22 @@
 
       <!-- <a routerLinkActive="active" routerLink="/shop" (click)="closeMenuAll()">購物商城</a> -->
       <a routerLinkActive="active" routerLink="/faq" (click)="closeMenuAll()">常見問題</a>
-      <a routerLinkActive="active" routerLink="/login" (click)="closeMenuAll()" class="user-icon" aria-label="登入">
-        <span>會員專區</span>
-      </a>
+      <a routerLinkActive="active" routerLink="/user/member" (click)="closeMenuAll()" class="user-icon" aria-label="登入" *ngIf="!userName">會員登入</a>
 
-      <div class="flex flex-nowrap" *ngIf="true">
-        <span class="material-icons mr-1 shrink-0">account_circle</span>
-        <span class="shrink-0">user-name</span>
+      <!-- 使用者選單 -->
+      <div class="menu-item has-submenu mt-2" #userMenu [class.active-parent]="memberRla.isActive" *ngIf="userName">
+        <span class="user-icon" (click)="toggleUserMenu($event)">
+          <span class="material-icons">account_circle</span>
+          <span>{{userName}}</span>
+          <span class="material-icons">
+            {{ userMenuOpen ? 'expand_less' : 'expand_more' }}
+          </span>
+        </span>
+
+        <div class="submenu" [class.open]="userMenuOpen">
+          <a routerLinkActive="active" #memberRla="routerLinkActive" routerLink="/user/member" (click)="closeMenuAll()">會員資料</a>
+          <a routerLink="/" (click)="logout()">登出</a>
+        </div>
       </div>
     </nav>
   </div>

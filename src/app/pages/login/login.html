@@ -1,14 +1,132 @@
-<div
-  class="
-    bg-black/90         /* 背景黑色半透明 */
-    w-full                /* 滿寬 */
-    fixed bottom-0 left-0 /* 固定底部 */
-    p-4                  /* padding */
-    overflow-y-auto         /* 內容超過可滾動 */
-    h-[50vh]              /* 手機板高度 60% */
-    md:h-[40vh]           /* 平板高度 50% */
-    lg:h-[30vh]           /* 桌機高度 40% */
-    bg-[linear-gradient(152deg,#071423_0%,#3D9BE9_100%)]
-  "
->
+<div class="min-h-screen flex items-center justify-center bg-gray-900">
+  <!-- 登入卡片 -->
+  <div
+    class="
+      w-[100%] md:w-[90%] lg:w-[80%] xl:w-[60%]
+      h-auto
+      rounded-xl shadow-lg overflow-hidden
+      flex flex-col
+      bg-black
+    "
+  >
+    <!-- 上方圖片 -->
+  <div
+    class="
+      w-full h-[350px] sm:h-[330px]
+      bg-cover
+      bg-top
+      bg-no-repeat
+    "
+    style="background-image: url(assets/main_background.avif);"
+  ></div>
+
+    <!-- 下方登入表單 -->
+    <div
+      class="
+        p-6 md:p-8
+        text-white
+        flex items-center justify-center
+        bg-black
+      "
+    >
+      <div class="w-full max-w-sm">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit($event)" class="space-y-4">
+          <!-- 會員名稱 -->
+          <div class="relative">
+            <input
+              type="text"
+              formControlName="username"
+              placeholder="會員名稱"
+              class="w-full p-3 rounded-md border bg-gray-800/80 text-white
+                    focus:outline-none placeholder-gray-400"
+              [ngClass]="{
+                'border-red-500': isInvalid('username'),
+                'border-gray-700': !isInvalid('username')
+              }"
+            />
+
+            <span
+              *ngIf="isInvalid('username')"
+              class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-red-400"
+            >
+              {{ getErrorMessage('username') }}
+            </span>
+          </div>
+
+          <!-- 手機 -->
+          <div class="relative">
+            <input
+              type="tel"
+              formControlName="phone"
+              placeholder="手機號碼"
+              class="w-full p-3 rounded-md border bg-gray-800/80 text-white
+                    focus:outline-none
+                    placeholder-gray-400"
+              [ngClass]="{
+                'border-red-500': isInvalid('phone'),
+                'border-gray-700': !isInvalid('phone')
+              }"
+            />
+
+            <!-- 錯誤提示（框內） -->
+            <span
+              *ngIf="isInvalid('phone')"
+              class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-red-400"
+            >
+              {{ getErrorMessage('phone') }}
+            </span>
+          </div>
+
+          <!-- 驗證碼 -->
+          <div class="relative">
+            <input
+              type="text"
+              formControlName="captcha"
+              placeholder="驗證碼"
+              class="w-full p-3 rounded-md border bg-gray-800/80 text-white
+                    focus:outline-none placeholder-gray-400"
+              [ngClass]="{
+                'border-red-500': isInvalid('captcha'),
+                'border-gray-700': !isInvalid('captcha')
+              }"
+            />
+
+            <span
+              *ngIf="isInvalid('captcha')"
+              class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-red-400"
+            >
+              {{ getErrorMessage('captcha') }}
+            </span>
+          </div>
+
+          <div>
+            <span class="text-blue-600 cursor-pointer" *ngIf="isLoginPage" (click)="isLoginPage = false">尚未成為會員?</span>
+          </div>
+
+          <!-- 登入按鈕 -->
+          <button
+            type="submit"
+            name="action" value="login"
+            *ngIf="isLoginPage"
+            class="w-full bg-blue-600 hover:bg-blue-700 transition-colors p-3 rounded-md font-semibold"
+          >
+            登入
+          </button>
+
+          <span class="text-blue-600 cursor-pointer" *ngIf="!isLoginPage" (click)="isLoginPage = true">會員登入</span>
+
+          <!-- 註冊按鈕 -->
+          <button
+            type="submit"
+            name="action" value="register"
+            *ngIf="!isLoginPage"
+            class="w-full bg-blue-600 hover:bg-blue-700 transition-colors p-3 rounded-md font-semibold"
+          >
+            註冊
+          </button>
+
+        </form>
+      </div>
+    </div>
+  </div>
 </div>

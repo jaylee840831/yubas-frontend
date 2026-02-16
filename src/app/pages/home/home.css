@@ -3,7 +3,7 @@
   background-color: rgba(0,0,0,0.9);
   min-height:calc(100vh - 140px); 
   padding:10px 0;
-  margin: 33% 0 0 0;
+  margin: 35% 0 0 0;
 }
 
 .card { 
@@ -12,13 +12,6 @@
   border-radius:6px; 
   border: 1px gray solid;
 }
-
-.card button {
-  padding:0.5rem 1rem; 
-  border-radius: 4px;
-  background:#007bff;
-  margin-top:1rem; 
- }
 
 .card p{
   color: rgb(181, 184, 255);
@@ -115,7 +108,7 @@
   .main-container { 
     min-height:calc(100vh - 140px); 
     padding:10px 0;
-    margin: 280px 0 0 0;
+    margin: 450px 0 0 0;
   }
 
   .slideTemplate img{

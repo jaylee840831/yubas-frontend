@@ -9,9 +9,11 @@ import { Partner } from './pages/partner/partner';
 import { Campaign } from './pages/campaign/campaign';
 import { Shop } from './pages/shop/shop';
 import { Login } from './pages/login/login';
+import { Member } from './pages/member/member';
 import { MainLayout } from './layouts/main-layout/main-layout';
 import { NoHeaderFooterLayout } from './layouts/no-header-footer-layout/no-header-footer-layout';
 import { NoContent } from './pages/no-content/no-content';
+import { authGuard } from './auth-guard';
 
 export const routes: Routes = [
     {
@@ -27,6 +29,7 @@ export const routes: Routes = [
             // { path: 'blog/trip', component: Trip },
             // { path: 'shop', component: Shop },
             { path: 'faq', component: Faq },
+            { path: 'user/member', component: Member, canActivate: [authGuard]},
 
             // TODO: 待開發畫面
             { path: 'business/company', component:  NoContent},
@@ -40,7 +43,10 @@ export const routes: Routes = [
         path: '',
         component: NoHeaderFooterLayout,
         children: [
-            { path: 'login', component: Login },
+            { 
+                path: 'login', 
+                loadComponent: () => import('./pages/login/login').then(m => m.Login)
+            }
         ]
     }
 ];

@@ -3,7 +3,9 @@
     <div class="card" *ngFor="let card of cards">
       <h5>{{ card.title }}</h5>
       <p>{{ card.description }}</p>
-      <button (click)="handleClick(card.link)">{{ card.button }}</button>
+      <button class="w-full bg-blue-600 hover:bg-blue-700 transition-colors mt-2 p-2 rounded-md font-semibold" (click)="handleClick(card.link)">
+        {{ card.button }}
+      </button>
     </div>
   </div>
 
