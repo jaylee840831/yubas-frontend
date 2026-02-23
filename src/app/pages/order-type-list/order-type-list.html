@@ -1,0 +1,23 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-900 p-4">
+  <div class="container">
+    <div class="grid-container mt-[8vh]">
+      <div class="card" *ngFor="let order of orders" style="background: #0B2F5B;">
+        <div class="card-image">
+          <img [src]="order.imageUrl" [alt]="order.title">
+        </div>
+        <div class="line-clamp-1">
+          <h5>{{ order.title }}</h5>
+        </div>
+        <div class="line-clamp-3 h-[80px]">
+          <p>{{ order.description }}</p>
+        </div>
+        <button
+          class="px-4 py-2 bg-blue-600 hover:bg-blue-700
+                transition-colors rounded-md font-semibold cursor-pointer"
+          (click)="go_to_booking(order.type)">
+          {{ order.buttonText }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

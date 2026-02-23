@@ -11,10 +11,10 @@
     <!-- 導航欄（大螢幕顯示） -->
     <nav [class.open]="menuOpen">
       <a routerLinkActive="active" routerLink="/about" (click)="closeMenuAll()">關於我們</a>
-      <!-- <a routerLinkActive="active" routerLink="/campaign" (click)="closeMenuAll()">活動公告</a> -->
+      <a routerLinkActive="active" routerLink="/campaign" (click)="closeMenuAll()">活動公告</a>
 
       <!-- 商業合作子選單 -->
-      <!-- <div class="menu-item has-submenu" #businessMenu routerLinkActive="active-parent">
+      <div class="menu-item has-submenu" #businessMenu routerLinkActive="active-parent">
         <span class="user-icon" (click)="toggleBusinessMenu($event)">
           <span>商業合作</span>
           <span class="material-icons">
@@ -26,10 +26,10 @@
           <a routerLinkActive="active" routerLink="/business/company" (click)="closeMenuAll()">企業包車</a>
           <a routerLinkActive="active" routerLink="/business/partner" (click)="closeMenuAll()">夥伴招募</a>
         </div>
-      </div> -->
+      </div>
 
       <!-- 部落格子選單 -->
-      <!-- <div class="menu-item has-submenu" #blogMenu routerLinkActive="active-parent">
+      <div class="menu-item has-submenu" #blogMenu routerLinkActive="active-parent">
         <span class="user-icon" (click)="toggleBlogMenu($event)">
           <span>部落格</span>
           <span class="material-icons">
@@ -41,11 +41,12 @@
           <a routerLinkActive="active" routerLink="/blog/fleet" (click)="closeMenuAll()">車隊專欄</a>
           <a routerLinkActive="active" routerLink="/blog/trip" (click)="closeMenuAll()">旅遊推薦</a>
         </div>
-      </div> -->
+      </div>
 
-      <!-- <a routerLinkActive="active" routerLink="/shop" (click)="closeMenuAll()">購物商城</a> -->
+      <a routerLinkActive="active" routerLink="/shop" (click)="closeMenuAll()">購物商城</a>
       <a routerLinkActive="active" routerLink="/faq" (click)="closeMenuAll()">常見問題</a>
-      <a routerLinkActive="active" routerLink="/user/member" (click)="closeMenuAll()" class="user-icon" aria-label="登入" *ngIf="!userName">會員登入</a>
+      <a routerLinkActive="active" routerLink="/booking" [routerLinkActiveOptions]="{ exact: false }" (click)="closeMenuAll()" *ngIf="userName">線上預約</a>
+      <a routerLinkActive="active" routerLink="/member" (click)="closeMenuAll()" *ngIf="!userName">會員登入</a>
 
       <!-- 使用者選單 -->
       <div class="menu-item has-submenu mt-2" #userMenu [class.active-parent]="memberRla.isActive" *ngIf="userName">
@@ -58,7 +59,7 @@
         </span>
 
         <div class="submenu" [class.open]="userMenuOpen">
-          <a routerLinkActive="active" #memberRla="routerLinkActive" routerLink="/user/member" (click)="closeMenuAll()">會員資料</a>
+          <a routerLinkActive="active" #memberRla="routerLinkActive" routerLink="/member" (click)="closeMenuAll()">會員資料</a>
           <a routerLink="/" (click)="logout()">登出</a>
         </div>
       </div>

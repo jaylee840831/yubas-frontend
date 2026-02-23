@@ -1,0 +1,18 @@
+<h5 mat-dialog-title style="color: white;">{{ data.title }}</h5>
+<div mat-dialog-content class="w-full flex flex-col items-center justify-center whitespace-pre-line">
+  <p>
+    {{ data.message }}
+  </p>
+</div>
+<mat-dialog-actions align="end">
+  <button class="px-4 py-2 mr-4 bg-black-600 hover:bg-black-700 border
+    transition-colors rounded-md font-semibold cursor-pointer"
+    (click)="onCancel()">
+    取消
+  </button>
+  <button class="px-4 py-2 bg-blue-600 hover:bg-blue-700
+    transition-colors rounded-md font-semibold cursor-pointer"
+    (click)="onConfirm()">
+    確定
+  </button>
+</mat-dialog-actions>

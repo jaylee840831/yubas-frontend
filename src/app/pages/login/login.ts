@@ -103,10 +103,8 @@ export class Login implements OnInit {
     const captcha = this.loginForm.value.captcha;
     const submitter = event.submitter as HTMLButtonElement;
 
-    console.log(submitter.value);
-
     if (submitter.value === 'login') {
-      if(username === '小李' && phone === '0912345678' && captcha === 'abc123') {
+      if(username === '小明' && phone === '0912345678' && captcha === 'abc123') {
         this.showAlert('登入成功', '', 'snackbar-success');
 
         localStorage.setItem(

@@ -6,31 +6,6 @@
   margin: 35% 0 0 0;
 }
 
-.card { 
-  background-color: rgba(0,0,0,0.7); 
-  padding:1rem; 
-  border-radius:6px; 
-  border: 1px gray solid;
-}
-
-.card p{
-  color: rgb(181, 184, 255);
-}
-
-.card-image{
-  width: 100%;
-  aspect-ratio: 16 / 9;  /* 控制卡片圖片比例 */
-  overflow: hidden;     /* 裁切超出部分 */
-  border-radius: 6px 6px 0 0;
-}
-
-.card-image img{
-  width: 100%;
-  height: 100%;
-  object-fit: contain;    /* 填滿不變形 */
-  display: block;
-}
-
 /* 章節標題 */
 .section-title {
   margin: 3rem 0 10px 0;
@@ -52,13 +27,6 @@
   padding: 1rem 5rem 1rem 5rem;
   border-radius: 30px;
   background: goldenrod;
-}
-
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 320px));
-  gap: 1.5rem;
-  justify-content: center;
 }
 
 .grid-4-container{

@@ -10,6 +10,8 @@ import { Campaign } from './pages/campaign/campaign';
 import { Shop } from './pages/shop/shop';
 import { Login } from './pages/login/login';
 import { Member } from './pages/member/member';
+import { Order } from './pages/order/order';
+import { OrderTypeList } from './pages/order-type-list/order-type-list';
 import { MainLayout } from './layouts/main-layout/main-layout';
 import { NoHeaderFooterLayout } from './layouts/no-header-footer-layout/no-header-footer-layout';
 import { NoContent } from './pages/no-content/no-content';
@@ -29,7 +31,9 @@ export const routes: Routes = [
             // { path: 'blog/trip', component: Trip },
             // { path: 'shop', component: Shop },
             { path: 'faq', component: Faq },
-            { path: 'user/member', component: Member, canActivate: [authGuard]},
+            { path: 'member', component: Member, canActivate: [authGuard]},
+            { path: 'booking/form', component: Order, canActivate: [authGuard]},
+            { path: 'booking', component: OrderTypeList, canActivate: [authGuard]},
 
             // TODO: 待開發畫面
             { path: 'business/company', component:  NoContent},
