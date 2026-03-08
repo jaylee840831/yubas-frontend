@@ -1,0 +1,22 @@
+<div class="page-container">
+  <mat-radio-group [(ngModel)]="selectedCarIndex">
+    <mat-card
+      class="car-card"
+      *ngFor="let car of carTypes; let i = index"
+      [class.selected]="selectedCarIndex === i"
+      (click)="selectCar(i)"
+    >
+      <!-- 圖片 -->
+      <img class="car-image" [src]="car.image" />
+      <!-- 標題＋註解 -->
+      <div class="car-info">
+        <div class="car-title">{{ car.title }}</div>
+        <div class="car-description">{{ car.description }}</div>
+      </div>
+      <!-- 價格 -->
+      <div class="car-price">
+        ${{ car.price }}
+      </div>
+    </mat-card>
+  </mat-radio-group>
+</div>

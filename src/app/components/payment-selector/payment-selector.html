@@ -1,0 +1,13 @@
+<mat-radio-group
+  [(ngModel)]="selectedValue"
+  (change)="onSelectionChange($event.value)"
+  class="w-full flex flex-col items-start gap-2"
+>
+  <mat-radio-button
+    *ngFor="let method of payments"
+    [value]="method"
+    [disabled]="isDisabled(method)"
+  >
+    {{ method.label }}
+  </mat-radio-button>
+</mat-radio-group>

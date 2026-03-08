@@ -1,0 +1,76 @@
+.page-container {
+  padding: 16px 0px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* 卡片 */
+.car-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #111827;
+  padding: 16px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: 0.1s;
+}
+
+.car-card.selected {
+  border: 2px solid lightgreen;
+  background-color: rgba(144, 238, 144, 0.1);
+}
+
+/* 圖片 */
+.car-image {
+  width: 80px;
+  height: 60px;
+  object-fit: contain;
+  margin-right: 16px;
+}
+
+/* 中間資訊 */
+.car-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.car-title {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.car-description {
+  font-size: 13px;
+  color: lightgray;
+  margin-top: 4px;
+}
+
+/* 價格 */
+.car-price {
+  font-weight: bold;
+  font-size: 16px;
+  margin-left: 16px;
+}
+
+/* RWD 手機優化 */
+@media (max-width: 600px) {
+
+  .car-image {
+    width: 60px;
+    height: 50px;
+  }
+
+  /* .car-title {
+    font-size: 14px;
+  }
+
+  .car-description {
+    font-size: 12px;
+  }
+
+  .car-price {
+    font-size: 14px;
+  } */
+}

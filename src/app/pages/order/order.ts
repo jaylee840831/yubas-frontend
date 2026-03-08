@@ -1,6 +1,6 @@
 import { Component, ViewChild, OnInit, NgZone } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormArray, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { MatStepperModule, MatStepper } from '@angular/material/stepper';
 import { MatButtonModule } from '@angular/material/button';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -8,16 +8,45 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialog } from '@angular/material/dialog';
 import { Map } from '../../components/map/map';
+import { CarSelector } from '../../components/car-selector/car-selector';
+import { PaymentSelector } from '../../components/payment-selector/payment-selector';
+import { Bill } from '../../components/bill/bill';
 import { CustomDialog } from '../../components/custom-dialog/custom-dialog';
 import { CommonModule } from '@angular/common';
 import { map, startWith } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { BillInfo, CarType, LocationItem, PaymentInfo } from '../../models/order.model';
 
-interface LocationItem {
-  name: string;
-  lat: number;
-  lng: number;
-}
+// 驗證時間
+export const timeRangeValidator: ValidatorFn = (
+  group: AbstractControl
+): ValidationErrors | null => {
+  const rideTime = group.get('rideTime')?.value;
+  const endTime = group.get('endTime')?.value;
+
+  if (!rideTime) return null;
+
+  const ride = new Date(rideTime);
+
+  const now = new Date();
+  now.setSeconds(0);
+  now.setMilliseconds(0);
+
+  // 開始時間不能早於現在
+  if (ride < now) {
+    return { rideTimePast: true };
+  }
+
+  // 開始時間不能晚於結束時間
+  if (endTime) {
+    const end = new Date(endTime);
+    if (ride >= end) {
+      return { timeRangeInvalid: true };
+    }
+  }
+
+  return null;
+};
 
 @Component({
   selector: 'app-booking',
@@ -31,7 +60,10 @@ interface LocationItem {
     MatInputModule,
     MatFormFieldModule,
     MatStepper,
-    Map
+    Map,
+    CarSelector,
+    PaymentSelector,
+    Bill
   ],
   templateUrl: './order.html',
   styleUrl: './order.css',
@@ -101,20 +133,25 @@ export class Order implements OnInit{
     this.bookingForm = this.fb.group({
       pickup: ['', Validators.required],
       dropoff: ['', Validators.required],
-      waypoints: this.fb.array([]), // 中途地點
+      waypoints: this.fb.array([]), // 中途停靠點
       airplaneNumber: ['', Validators.required],
       note: ['', Validators.required],
-      charterTime: [4, Validators.required], // 包車時長
+      charterTime: [8, Validators.required], // 包車時長
       rideTime: ['', Validators.required], // 開始時間
       endTime: ['', Validators.required], // 結束時間
       adults: [1],
       children: [0],
       childSeat: [0],
       boosterSeat: [0],
+      meetAndGreet: [''],
       luggage20: [0],
       luggage24: [0],
-      luggage28: [0]
-    });
+      luggage28: [0],
+      specialRequests: [''], // 備註
+      carType: [null], // 選擇車型
+      payment: [null], // 付款方式
+      bill: [null] // 發票
+    }, { validators: timeRangeValidator });
   }
 
   get waypoints() {
@@ -129,15 +166,38 @@ export class Order implements OnInit{
     return this.bookingForm.get('dropoff')?.value;
   }
 
-  // 選擇目前位置, 開啟gps定位
+  onCarSelected(car: CarType) {
+    // console.log('選擇車型:', car);
+    this.bookingForm.patchValue({
+      carType: car
+    });
+  }
+
+  onPaymentSelected(method: PaymentInfo) {
+    // console.log('付款方式:', method);
+    this.bookingForm.patchValue({
+      payment: method
+    });
+  }
+
+  onBillChange(bill: BillInfo) {
+    // console.log('發票資訊:', bill);
+    this.bookingForm.patchValue({
+      bill: bill
+    });
+  }
+
   onLocationSelect(option: any, event: any) {
     if (!event.isUserInput) return;
+
+    // console.log('選擇地點:', option.name);
 
     if (option.name === '目前位置') {
       this.requestLocation();
     }
   }
 
+  // 開啟gps定位
   async requestLocation() {
     if (!navigator.geolocation) {
       alert('您的瀏覽器不支援定位功能');
@@ -224,8 +284,8 @@ export class Order implements OnInit{
     }
   }
 
-  // 不同種類的表單, 暫時移除不需要的欄位驗證
-  vaildateFormConfirm() {
+  // 不同種類的表單, 移除不需要的欄位驗證
+  removeUnusedFieldValidations() {
     if(this.currentFormType === this.TYPE_AIRPORT) {
       this.bookingForm.get('charterTime')?.clearValidators();
       this.bookingForm.get('endTime')?.clearValidators();
@@ -247,21 +307,37 @@ export class Order implements OnInit{
     this.bookingForm.get('airplaneNumber')?.updateValueAndValidity();
   }
 
+  // 驗證失敗的欄位顯示紅框
   isInvalid(controlName: string): boolean {
     const control = this.bookingForm.get(controlName);
+
+    // 驗證時間
+    if(controlName === 'rideTime') {
+      if (this.bookingForm.hasError('rideTimePast')) {
+        return true;
+      }
+    }
+
+    if(controlName === 'rideTime' || controlName === 'endTime') {
+      if (this.bookingForm.hasError('timeRangeInvalid')) {
+        return true;
+      }
+    }
+
     return !!(control?.invalid && (control.dirty || control.touched));
   }
 
-  // 計算行車路徑
-  calculateRoute(stepper: MatStepper) {
-    this.vaildateFormConfirm();
+  // 前往步驟二
+  goToStep2(stepper: MatStepper) {
+    this.removeUnusedFieldValidations();
 
+    // 驗證表單資料
     if(this.bookingForm.invalid) {
       this.bookingForm.markAllAsTouched();
 
       window.scrollTo({
         top: 0,
-        behavior: 'smooth' // 平滑滾動
+        behavior: 'smooth'
       });
 
       return;
@@ -282,9 +358,9 @@ export class Order implements OnInit{
       const dropoff = this.getLocation(this.bookingForm.value.dropoff);
       if (dropoff) coords.push([dropoff.lng, dropoff.lat]);
       
-      // 傳給 map 元件畫路徑
+      // 傳給 map 元件畫路徑, 前往訂單下一步驟
       if (coords.length >= 2) {
-        console.log('送出座標', coords);
+        // console.log('送出座標', coords);
         this.mapComponent.drawRoute(coords);
         stepper.next();
       }
@@ -343,7 +419,7 @@ export class Order implements OnInit{
     }
   }
 
-  // 新增中途地點
+  // 新增中途停靠點
   addWaypoint() {
     if (this.waypoints.length < 3) {
       const control = this.fb.control('');
@@ -359,7 +435,7 @@ export class Order implements OnInit{
     }
   }
 
-  // 刪除中途地點
+  // 刪除中途停靠點
   removeWaypoint(index: number) {
     this.waypoints.removeAt(index);
     this.filteredWaypointsOptions.splice(index, 1);

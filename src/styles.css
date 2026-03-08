@@ -173,6 +173,23 @@ a {
   color: white !important;
 }
 
+.mat-mdc-radio-button .mdc-label {
+  font-size: 16px !important;
+}
+
+.mat-mdc-radio-button.mat-mdc-radio-disabled 
+.mdc-radio__outer-circle {
+  border-color: #cbd5e1 !important;
+}
+
+.mat-mdc-radio-disabled .mdc-label {
+  color: #9ca3af !important;
+}
+
+.notice p {
+  color: rgb(181, 184, 255);
+}
+
 @media (min-width: 1200px) {
   h5, .h5{
     font-size: 1.25rem;
@@ -212,13 +229,17 @@ a {
 }
 
 @media (max-width: 752px) {
-    /* 背景圖 */
-    body {
-      background-image: url(assets/main_background_mobile.avif);
-      background-size:contain;
-      background-repeat: repeat;
-      background-attachment: fixed; /* 滾動時背景固定 */
-    }
+  .mat-step-text-label {
+    display: none;
+  }
+
+  /* 背景圖 */
+  body {
+    background-image: url(assets/main_background_mobile.avif);
+    background-size:contain;
+    background-repeat: repeat;
+    background-attachment: fixed; /* 滾動時背景固定 */
+  }
 
   .arrow-card::after {
     content: "";

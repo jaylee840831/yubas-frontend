@@ -1,7 +1,3 @@
-.notice p {
-  color: rgb(181, 184, 255);
-}
-
 .custom-date::-webkit-calendar-picker-indicator {
   filter: invert(1);
   cursor: pointer;

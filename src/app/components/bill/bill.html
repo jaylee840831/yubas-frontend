@@ -1,0 +1,51 @@
+<mat-radio-group
+  [(ngModel)]="invoiceType"
+  (change)="onInvoiceTypeChange($event.value)"
+  class="flex gap-4 mb-4"
+>
+  <mat-radio-button value="personal">個人</mat-radio-button>
+  <mat-radio-button value="company">企業</mat-radio-button>
+</mat-radio-group>
+
+<div class="space-y-4">
+  <!-- 發票資料(企業才顯示) -->
+  <div *ngIf="invoiceType === 'company'" class="space-y-4">
+    <div>
+      <label class="block text-sm mb-1">發票統編</label>
+      <input
+        matInput
+        [(ngModel)]="bill.number"
+        (ngModelChange)="emitBill()"
+        class="w-full p-3 rounded-md border bg-gray-800/80"
+      />
+    </div>
+
+    <div>
+      <label class="block text-sm mb-1">發票公司抬頭</label>
+      <input
+        matInput
+        [(ngModel)]="bill.company"
+        (ngModelChange)="emitBill()"
+        class="w-full p-3 rounded-md border bg-gray-800/80"
+      />
+    </div>
+  </div>
+
+  <!-- 地址 (兩種都顯示) -->
+  <div>
+    <label class="block text-sm mb-1">發票收件地址</label>
+    <input
+      matInput
+      placeholder="請輸入完整地址"
+      [(ngModel)]="bill.address"
+      (ngModelChange)="emitBill()"
+      class="w-full p-3 rounded-md border bg-gray-800/80"
+    />
+  </div>
+
+  <div class="flex items-center notice">
+    <p>
+      ※ 報價均未稅金額，發票會額外+5%稅金費用，服務完成次一工作日寄出至您收件地址。
+    </p>
+  </div>
+</div>
