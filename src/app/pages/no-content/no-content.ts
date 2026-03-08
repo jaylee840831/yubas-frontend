@@ -6,6 +6,4 @@ import { Component } from '@angular/core';
   templateUrl: './no-content.html',
   styleUrl: './no-content.css',
 })
-export class NoContent {
-
-}
+export class NoContent {}

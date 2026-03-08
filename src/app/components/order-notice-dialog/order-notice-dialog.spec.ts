@@ -8,9 +8,8 @@ describe('OrderNoticeDialog', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [OrderNoticeDialog]
-    })
-    .compileComponents();
+      imports: [OrderNoticeDialog],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(OrderNoticeDialog);
     component = fixture.componentInstance;

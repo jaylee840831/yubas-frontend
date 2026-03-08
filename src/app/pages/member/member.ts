@@ -15,17 +15,15 @@ interface User {
 export class Member {
   user: User = {
     username: '',
-    phone: ''
+    phone: '',
   };
 
-  constructor(
-    private authService: AuthService
-  ){}
+  constructor(private authService: AuthService) {}
 
   ngOnInit() {
     this.user = {
       username: this.authService.getUsername(),
-      phone: this.authService.getUserPhone()
-    }
+      phone: this.authService.getUserPhone(),
+    };
   }
 }

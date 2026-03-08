@@ -6,9 +6,10 @@
     <h4 *ngIf="currentFormType === TYPE_CHARTER">包車服務</h4>
   </div>
   <mat-stepper
-    [linear]="true" #stepper
+    [linear]="true"
+    #stepper
     class="w-full max-w-3xl min-h-[70vh] rounded-xl p-1 text-white"
-    style="background: black;"
+    style="background: black"
   >
     <!-- 步驟一 填寫資料 -->
     <mat-step [stepControl]="bookingForm">
@@ -17,8 +18,8 @@
         <div class="space-y-4">
           <!-- 上車地點 -->
           <div>
-              <label class="block text-sm mb-1">上車地點</label>
-              <input
+            <label class="block text-sm mb-1">上車地點</label>
+            <input
               type="text"
               placeholder="請填寫完整上車地點"
               matInput
@@ -27,27 +28,26 @@
               class="w-full p-3 rounded-md border bg-gray-800/80"
               [ngClass]="{
                 'border-red-500': isInvalid('pickup'),
-                'border-gray-700': !isInvalid('pickup')
+                'border-gray-700': !isInvalid('pickup'),
               }"
-              />
-              <mat-autocomplete #autoPickup="matAutocomplete">
-                <mat-option
-                  *ngFor="let option of filteredPickupOptions | async"
-                  [value]="option.name"
-                  (onSelectionChange)="onLocationSelect(option, $event)">
-                    {{ option.name }}
-                    <!-- {{ option.lat}}
+            />
+            <mat-autocomplete #autoPickup="matAutocomplete">
+              <mat-option
+                *ngFor="let option of filteredPickupOptions | async"
+                [value]="option.name"
+                (onSelectionChange)="onLocationSelect(option, $event)"
+              >
+                {{ option.name }}
+                <!-- {{ option.lat}}
                     {{ option.lng}} -->
-                </mat-option>
-              </mat-autocomplete>
+              </mat-option>
+            </mat-autocomplete>
           </div>
 
           <!-- 中途停靠點 -->
           <div formArrayName="waypoints" class="space-y-3">
             <div *ngFor="let wp of waypoints.controls; let i = index">
-              <label class="block text-sm mb-1">
-                中途停靠點 {{ i + 1 }}
-              </label>
+              <label class="block text-sm mb-1"> 中途停靠點 {{ i + 1 }} </label>
 
               <div class="flex gap-2">
                 <input
@@ -58,26 +58,24 @@
                   [matAutocomplete]="autoWayPoint"
                   class="flex-1 p-3 rounded-md border bg-gray-800/80"
                   [ngClass]="{
-                  'border-red-500': isInvalid(i.toString()),
-                  'border-gray-700': !isInvalid(i.toString())
-              }"
+                    'border-red-500': isInvalid(i.toString()),
+                    'border-gray-700': !isInvalid(i.toString()),
+                  }"
                 />
 
                 <mat-autocomplete #autoWayPoint="matAutocomplete">
                   <mat-option
                     *ngFor="let option of filteredWaypointsOptions[i] | async"
                     [value]="option.name"
-                    (onSelectionChange)="onLocationSelect(option, $event)">
+                    (onSelectionChange)="onLocationSelect(option, $event)"
+                  >
                     {{ option.name }}
                     <!-- {{ option.lat}}
                     {{ option.lng}} -->
                   </mat-option>
                 </mat-autocomplete>
 
-                <button
-                  type="button"
-                  (click)="removeWaypoint(i)"
-                  class="px-3 bg-red-600 rounded">
+                <button type="button" (click)="removeWaypoint(i)" class="px-3 bg-red-600 rounded">
                   刪除
                 </button>
               </div>
@@ -86,8 +84,8 @@
 
           <!-- 下車地點 -->
           <div>
-              <label class="block text-sm mb-1">下車地點</label>
-              <input
+            <label class="block text-sm mb-1">下車地點</label>
+            <input
               type="text"
               placeholder="請填寫完整下車地點"
               matInput
@@ -96,42 +94,50 @@
               class="w-full p-3 rounded-md border bg-gray-800/80"
               [ngClass]="{
                 'border-red-500': isInvalid('dropoff'),
-                'border-gray-700': !isInvalid('dropoff')
+                'border-gray-700': !isInvalid('dropoff'),
               }"
-              />
-              <mat-autocomplete #autoDropoff="matAutocomplete">
-                <mat-option
-                  *ngFor="let option of filteredDropoffOptions | async"
-                  [value]="option.name"
-                  (onSelectionChange)="onLocationSelect(option, $event)">
-                  {{ option.name }}
-                  <!-- {{ option.lat}}
+            />
+            <mat-autocomplete #autoDropoff="matAutocomplete">
+              <mat-option
+                *ngFor="let option of filteredDropoffOptions | async"
+                [value]="option.name"
+                (onSelectionChange)="onLocationSelect(option, $event)"
+              >
+                {{ option.name }}
+                <!-- {{ option.lat}}
                   {{ option.lng}} -->
-                </mat-option>
-              </mat-autocomplete>
+              </mat-option>
+            </mat-autocomplete>
           </div>
 
           <!-- 新增中途停靠點 -->
           <button
             type="button"
             (click)="addWaypoint()"
-            *ngIf="waypoints.length < 3 && currentFormType != TYPE_CHARTER && pickup != '' && dropoff != '' "
-            class="mt-2 px-4 py-2 bg-gray-700 rounded">
+            *ngIf="
+              waypoints.length < 3 &&
+              currentFormType != TYPE_CHARTER &&
+              pickup != '' &&
+              dropoff != ''
+            "
+            class="mt-2 px-4 py-2 bg-gray-700 rounded"
+          >
             + 新增中途停靠點
           </button>
 
           <!-- 航班編號(僅機場接送) -->
           <div *ngIf="currentFormType === TYPE_AIRPORT">
             <label class="block text-sm mb-1">航班編號</label>
-            <input type="text"
-            formControlName="airplaneNumber"
-            placeholder="例如BR716、CI123"
-            class="w-full p-3 rounded-md border bg-gray-800/80"
-            [ngClass]="{
-              'border-red-500': isInvalid('airplaneNumber'),
-              'border-gray-700': !isInvalid('airplaneNumber')
-            }"
-          />
+            <input
+              type="text"
+              formControlName="airplaneNumber"
+              placeholder="例如BR716、CI123"
+              class="w-full p-3 rounded-md border bg-gray-800/80"
+              [ngClass]="{
+                'border-red-500': isInvalid('airplaneNumber'),
+                'border-gray-700': !isInvalid('airplaneNumber'),
+              }"
+            />
           </div>
 
           <!-- 接送行程(僅包車服務) -->
@@ -144,8 +150,9 @@
               placeholder="請填寫本次接送行程（出發地、途中停靠點、目的地），例如：台北福華飯店 → 野柳 → 十分 → 九份 → 台北福華飯店。"
               [ngClass]="{
                 'border-red-500': isInvalid('note'),
-                'border-gray-700': !isInvalid('note')
-              }">
+                'border-gray-700': !isInvalid('note'),
+              }"
+            >
             </textarea>
             <div class="absolute bottom-2 right-3 text-sm text-gray-400">
               {{ bookingForm.value.note.length || 0 }} / {{ 800 }}
@@ -157,143 +164,181 @@
 
           <!-- 乘車時間 -->
           <div>
-              <label class="block text-sm mb-1" *ngIf="currentFormType === TYPE_CHARTER">開始時間</label>
-              <label class="block text-sm mb-1" *ngIf="currentFormType != TYPE_CHARTER">乘車時間</label>
-              <input type="datetime-local"
+            <label class="block text-sm mb-1" *ngIf="currentFormType === TYPE_CHARTER"
+              >開始時間</label
+            >
+            <label class="block text-sm mb-1" *ngIf="currentFormType != TYPE_CHARTER"
+              >乘車時間</label
+            >
+            <input
+              type="datetime-local"
               formControlName="rideTime"
               class="custom-date w-full p-3 rounded-md border bg-gray-800/80"
               [ngClass]="{
                 'border-red-500': isInvalid('rideTime'),
-                'border-gray-700': !isInvalid('rideTime')
-              }"/>
+                'border-gray-700': !isInvalid('rideTime'),
+              }"
+            />
           </div>
 
           <!-- 結束時間(僅包車服務) -->
           <div *ngIf="currentFormType === TYPE_CHARTER">
-              <label class="block text-sm mb-1">結束時間</label>
-              <input type="datetime-local"
+            <label class="block text-sm mb-1">結束時間</label>
+            <input
+              type="datetime-local"
               formControlName="endTime"
               class="custom-date w-full p-3 rounded-md border bg-gray-800/80"
               [ngClass]="{
                 'border-red-500': isInvalid('endTime'),
-                'border-gray-700': !isInvalid('endTime')
-              }"/>
+                'border-gray-700': !isInvalid('endTime'),
+              }"
+            />
           </div>
 
           <!-- 包車時數(僅包車服務) -->
           <div *ngIf="currentFormType === TYPE_CHARTER">
-            <label class="block text-sm mb-1">
-              包車時數(小時/天)
-            </label>
+            <label class="block text-sm mb-1"> 包車時數(小時/天) </label>
             <select
               formControlName="charterTime"
-              class="w-full p-3 rounded-md border bg-gray-800/80">
-              <option *ngFor="let item of charterTimes"
-                      [value]="item.value">
+              class="w-full p-3 rounded-md border bg-gray-800/80"
+            >
+              <option *ngFor="let item of charterTimes" [value]="item.value">
                 {{ item.label }}
               </option>
             </select>
           </div>
 
-          <br>
-          <br>
+          <br />
+          <br />
 
           <!-- 人數 -->
           <h5>乘客人數</h5>
-          <ng-container *ngFor="let item of [
-              {label:'一般成人', field:'adults'},
-              {label:'4歲以下兒童', field:'children'}
-          ]">
-              <div class="flex items-center justify-between pl-6">
-                <span>{{item.label}}</span>
-                <div class="flex items-center gap-3">
-                    <button type="button"
-                    (click)="decrement(item.field)"
-                    class="w-8 h-8 bg-gray-700 hover:bg-gray-600 rounded cursor-pointer">
-                    -
-                    </button>
-                    <span>{{ bookingForm.get(item.field)?.value }}</span>
-                    <button type="button"
-                    (click)="increment(item.field)"
-                    class="w-8 h-8 bg-gray-700 hover:bg-gray-600 rounded cursor-pointer">
-                    +
-                    </button>
-                </div>
+          <ng-container
+            *ngFor="
+              let item of [
+                { label: '一般成人', field: 'adults' },
+                { label: '4歲以下兒童', field: 'children' },
+              ]
+            "
+          >
+            <div class="flex items-center justify-between pl-6">
+              <span>{{ item.label }}</span>
+              <div class="flex items-center gap-3">
+                <button
+                  type="button"
+                  (click)="decrement(item.field)"
+                  class="w-8 h-8 bg-gray-700 hover:bg-gray-600 rounded cursor-pointer"
+                >
+                  -
+                </button>
+                <span>{{ bookingForm.get(item.field)?.value }}</span>
+                <button
+                  type="button"
+                  (click)="increment(item.field)"
+                  class="w-8 h-8 bg-gray-700 hover:bg-gray-600 rounded cursor-pointer"
+                >
+                  +
+                </button>
               </div>
+            </div>
           </ng-container>
 
           <div class="flex items-center notice">
-            <p>※ 交通部公告109年9月1日起實施的「小型車附載幼童安全乘坐辦法」，其中規定4歲以下幼童，應坐於車輛後座之嬰兒安全座椅。</p>
+            <p>
+              ※
+              交通部公告109年9月1日起實施的「小型車附載幼童安全乘坐辦法」，其中規定4歲以下幼童，應坐於車輛後座之嬰兒安全座椅。
+            </p>
           </div>
 
           <!-- 特殊需求 -->
           <h5>特殊需求</h5>
-          <ng-container *ngFor="let item of [
-              {label:'嬰兒安全座椅', field:'childSeat'},
-              {label:'兒童增高坐墊', field:'boosterSeat'}
-          ]">
+          <ng-container
+            *ngFor="
+              let item of [
+                { label: '嬰兒安全座椅', field: 'childSeat' },
+                { label: '兒童增高坐墊', field: 'boosterSeat' },
+              ]
+            "
+          >
             <div class="flex items-center justify-between pl-6">
-              <span>{{item.label}}</span>
+              <span>{{ item.label }}</span>
               <div class="flex items-center gap-3">
-                  <button type="button"
+                <button
+                  type="button"
                   (click)="decrement(item.field)"
-                  class="w-8 h-8 bg-gray-700 hover:bg-gray-600 rounded cursor-pointer">
+                  class="w-8 h-8 bg-gray-700 hover:bg-gray-600 rounded cursor-pointer"
+                >
                   -
-                  </button>
-                  <span>{{ bookingForm.get(item.field)?.value }}</span>
-                  <button type="button"
+                </button>
+                <span>{{ bookingForm.get(item.field)?.value }}</span>
+                <button
+                  type="button"
                   (click)="increment(item.field)"
-                  class="w-8 h-8 bg-gray-700 hover:bg-gray-600 rounded cursor-pointer">
+                  class="w-8 h-8 bg-gray-700 hover:bg-gray-600 rounded cursor-pointer"
+                >
                   +
-                  </button>
+                </button>
               </div>
             </div>
           </ng-container>
-          <div 
+          <div
             *ngIf="currentFormType === TYPE_AIRPORT || currentFormType === TYPE_CHARTER"
-            class="flex items-center justify-between pl-6">
+            class="flex items-center justify-between pl-6"
+          >
             <span>舉牌服務</span>
-            <input type="text"
+            <input
+              type="text"
               formControlName="meetAndGreet"
               placeholder="輸入舉牌姓名"
-              class="w-[60%] p-3 rounded-md border bg-gray-800/80 border-gray-700">
+              class="w-[60%] p-3 rounded-md border bg-gray-800/80 border-gray-700"
+            />
           </div>
 
           <div
             *ngIf="currentFormType === TYPE_AIRPORT || currentFormType === TYPE_CHARTER"
-            class="w-full flex justify-end notice">
+            class="w-full flex justify-end notice"
+          >
             <p>※ 服務當天由專人舉牌指引至上車地點。 (日夜統一價 $300/次)</p>
           </div>
 
           <!-- 選擇行李 -->
           <h5>選擇行李</h5>
-          <ng-container *ngFor="let item of [
-              {label:'20~24吋行李', field:'luggage20'},
-              {label:'24~28吋行李', field:'luggage24'},
-              {label:'28~30吋行李', field:'luggage28'}
-          ]">
-              <div class="flex items-center justify-between pl-6">
-                <span>{{item.label}}</span>
-                <div class="flex items-center gap-3">
-                    <button type="button"
-                    (click)="decrement(item.field)"
-                    class="w-8 h-8 bg-gray-700 hover:bg-gray-600 rounded cursor-pointer">
-                    -
-                    </button>
-                    <span>{{ bookingForm.get(item.field)?.value }}</span>
-                    <button type="button"
-                    (click)="increment(item.field)"
-                    class="w-8 h-8 bg-gray-700 hover:bg-gray-600 rounded cursor-pointer">
-                    +
-                    </button>
-                </div>
+          <ng-container
+            *ngFor="
+              let item of [
+                { label: '20~24吋行李', field: 'luggage20' },
+                { label: '24~28吋行李', field: 'luggage24' },
+                { label: '28~30吋行李', field: 'luggage28' },
+              ]
+            "
+          >
+            <div class="flex items-center justify-between pl-6">
+              <span>{{ item.label }}</span>
+              <div class="flex items-center gap-3">
+                <button
+                  type="button"
+                  (click)="decrement(item.field)"
+                  class="w-8 h-8 bg-gray-700 hover:bg-gray-600 rounded cursor-pointer"
+                >
+                  -
+                </button>
+                <span>{{ bookingForm.get(item.field)?.value }}</span>
+                <button
+                  type="button"
+                  (click)="increment(item.field)"
+                  class="w-8 h-8 bg-gray-700 hover:bg-gray-600 rounded cursor-pointer"
+                >
+                  +
+                </button>
               </div>
+            </div>
           </ng-container>
 
           <!-- 注意事項 -->
           <div class="flex items-center notice">
             <p>
-              ※ 服務當天實際行李數量與預約內容不符時，因考量「超載」違規風險，駕駛有權拒絕服務，屆此造成損失本平台將不負賠償責任。
+              ※
+              服務當天實際行李數量與預約內容不符時，因考量「超載」違規風險，駕駛有權拒絕服務，屆此造成損失本平台將不負賠償責任。
             </p>
           </div>
 
@@ -303,7 +348,8 @@
               [maxlength]="100"
               rows="2"
               class="w-full border rounded p-3 bg-gray-800/80"
-              placeholder="備註">
+              placeholder="備註"
+            >
             </textarea>
             <div class="absolute bottom-2 right-3 text-sm text-gray-400">
               {{ bookingForm.value.specialRequests.length || 0 }} / {{ 100 }}
@@ -314,7 +360,8 @@
           <div class="flex justify-end pt-4">
             <button
               (click)="goToStep2(stepper)"
-              class="bg-blue-600 hover:bg-blue-700 transition-colors p-3 rounded-md font-semibold cursor-pointer">
+              class="bg-blue-600 hover:bg-blue-700 transition-colors p-3 rounded-md font-semibold cursor-pointer"
+            >
               確認報價
             </button>
           </div>
@@ -327,29 +374,29 @@
       <ng-template matStepLabel>確認報價</ng-template>
       <div class="space-y-4">
         <!-- 行車路線地圖 -->
-        <app-map>
-        </app-map>
+        <app-map> </app-map>
 
         <div
           *ngIf="currentFormType === TYPE_AIRPORT || currentFormType === TYPE_CHARTER"
-          class="w-full notice">
-          <p>
-            ※ 臨時預約 會產生臨時調度費用
-          </p>
+          class="w-full notice"
+        >
+          <p>※ 臨時預約 會產生臨時調度費用</p>
         </div>
 
         <!-- 各車型報價列表 -->
-        <app-car-selector
-          (carSelected)="onCarSelected($event)">
-        </app-car-selector>
+        <app-car-selector (carSelected)="onCarSelected($event)"> </app-car-selector>
 
         <div class="flex justify-between pt-4">
-          <button matStepperPrevious
-            class="bg-gray-600 hover:bg-gray-700 transition-colors p-3 rounded-md font-semibold cursor-pointer">
+          <button
+            matStepperPrevious
+            class="bg-gray-600 hover:bg-gray-700 transition-colors p-3 rounded-md font-semibold cursor-pointer"
+          >
             上一步
           </button>
-          <button matStepperNext
-            class="bg-blue-600 hover:bg-blue-700 transition-colors p-3 rounded-md font-semibold cursor-pointer">
+          <button
+            matStepperNext
+            class="bg-blue-600 hover:bg-blue-700 transition-colors p-3 rounded-md font-semibold cursor-pointer"
+          >
             付款方式
           </button>
         </div>
@@ -360,27 +407,25 @@
     <mat-step>
       <ng-template matStepLabel>付款方式</ng-template>
       <div class="space-y-4">
-        <app-payment-selector
-          (paymentSelected)="onPaymentSelected($event)">
-        </app-payment-selector>
+        <app-payment-selector (paymentSelected)="onPaymentSelected($event)"> </app-payment-selector>
 
-        <br>
-        
-        <h5>
-          需要開立發票嗎?
-        </h5>
+        <br />
 
-        <app-bill 
-          (billChange)="onBillChange($event)">
-        </app-bill>
+        <h5>需要開立發票嗎?</h5>
+
+        <app-bill (billChange)="onBillChange($event)"> </app-bill>
 
         <div class="flex justify-between pt-4">
-          <button matStepperPrevious
-            class="bg-gray-600 hover:bg-gray-700 transition-colors p-3 rounded-md font-semibold cursor-pointer">
+          <button
+            matStepperPrevious
+            class="bg-gray-600 hover:bg-gray-700 transition-colors p-3 rounded-md font-semibold cursor-pointer"
+          >
             上一步
           </button>
-          <button matStepperNext
-            class="bg-blue-600 hover:bg-blue-700 transition-colors p-3 rounded-md font-semibold cursor-pointer">
+          <button
+            matStepperNext
+            class="bg-blue-600 hover:bg-blue-700 transition-colors p-3 rounded-md font-semibold cursor-pointer"
+          >
             確認訂單
           </button>
         </div>
@@ -391,15 +436,20 @@
     <mat-step>
       <ng-template matStepLabel>確認訂單</ng-template>
       <div class="space-y-4">
-      <div class="flex justify-between pt-4">
-        <button matStepperPrevious
-          class="bg-gray-600 hover:bg-gray-700 transition-colors p-3 rounded-md font-semibold cursor-pointer">
-          上一步
-        </button>
-        <button class="bg-blue-600 hover:bg-blue-700 transition-colors p-3 rounded-md font-semibold cursor-pointer">
-          送出
-        </button>
-      </div>
+        <span style="white-space: pre">{{ bookingForm.value | json }}</span>
+        <div class="flex justify-between pt-4">
+          <button
+            matStepperPrevious
+            class="bg-gray-600 hover:bg-gray-700 transition-colors p-3 rounded-md font-semibold cursor-pointer"
+          >
+            上一步
+          </button>
+          <button
+            class="bg-blue-600 hover:bg-blue-700 transition-colors p-3 rounded-md font-semibold cursor-pointer"
+          >
+            送出
+          </button>
+        </div>
       </div>
     </mat-step>
   </mat-stepper>

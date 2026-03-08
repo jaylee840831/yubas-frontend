@@ -1,18 +1,18 @@
-header{
+header {
   width: 100%;
   background-color: black;
   color: white;
-  position: fixed;   /* 固定在畫面頂端 */
-  top: 0;            /* 從頂部開始 */
+  position: fixed; /* 固定在畫面頂端 */
+  top: 0; /* 從頂部開始 */
   left: 0;
-  z-index: 1001;     /* 確保在最上層 */
+  z-index: 1001; /* 確保在最上層 */
 }
 
 /* Header 容器 */
 .header-container {
   display: flex;
   justify-content: space-between; /* 左右兩端對齊 */
-  align-items: center;            /* 垂直置中 */
+  align-items: center; /* 垂直置中 */
   padding: 0.25rem 0;
   position: relative;
 }
@@ -28,8 +28,8 @@ header{
   display: none; /* 大螢幕隱藏 */
   background: none;
   border: none;
-  font-size: 2rem;      /* icon 大小 */
-  color: #fff;           /* icon 顏色 */
+  font-size: 2rem; /* icon 大小 */
+  color: #fff; /* icon 顏色 */
 }
 .hamburger span {
   line-height: 1;
@@ -78,19 +78,21 @@ nav a.active span {
 /* 子選單 */
 .submenu {
   position: absolute;
-  top: 100%;              /* 貼在父層底下 */
+  top: 100%; /* 貼在父層底下 */
   left: 0;
   min-width: 180px;
 
   background: #000;
   border-radius: 6px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
 
   opacity: 0;
   transform: translateY(-8px);
   pointer-events: none;
 
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
   z-index: 1000;
 }
 
@@ -125,14 +127,14 @@ nav a.active span {
   }
 
   .hamburger {
-    display: flex;          /* 小螢幕顯示漢堡 */
+    display: flex; /* 小螢幕顯示漢堡 */
     align-items: center;
     justify-content: center;
     cursor: pointer;
     z-index: 1001;
   }
 
-  .hamburger span{
+  .hamburger span {
     width: 30px;
     background: black;
     border-radius: 5px;
@@ -154,11 +156,11 @@ nav a.active span {
   }
 
   .submenu.open {
-    max-height: 500px;         /* 足夠容納子選單 */
+    max-height: 500px; /* 足夠容納子選單 */
   }
 
   .submenu a {
-    padding-left: 1.5rem;      /* 視覺縮排 */
+    padding-left: 1.5rem; /* 視覺縮排 */
     font-size: 0.95rem;
     opacity: 0.9;
   }
@@ -173,19 +175,21 @@ nav a.active span {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    z-index: 1000; 
+    z-index: 1000;
 
     /* 初始隱藏 */
     transform: translateY(-100%); /* 從上方滑入 */
-    opacity: 0;                   /* 透明 */
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    pointer-events: none;          /* 關閉時不允許點擊 */
+    opacity: 0; /* 透明 */
+    transition:
+      transform 0.3s ease,
+      opacity 0.3s ease;
+    pointer-events: none; /* 關閉時不允許點擊 */
   }
 
   nav.open {
-    transform: translateY(0);      /* 滑下來 */
-    opacity: 1;                     /* 顯示 */
-    pointer-events: auto;           /* 可以點擊 */
+    transform: translateY(0); /* 滑下來 */
+    opacity: 1; /* 顯示 */
+    pointer-events: auto; /* 可以點擊 */
   }
 
   nav a {

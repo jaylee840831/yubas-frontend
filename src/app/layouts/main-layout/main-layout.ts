@@ -6,10 +6,8 @@ import { Footer } from '../../components/footer/footer';
 
 @Component({
   selector: 'app-main-layout',
-  imports: [RouterOutlet,CommonModule, Header, Footer],
+  imports: [RouterOutlet, CommonModule, Header, Footer],
   templateUrl: './main-layout.html',
   styleUrl: './main-layout.css',
 })
-export class MainLayout {
-
-}
+export class MainLayout {}

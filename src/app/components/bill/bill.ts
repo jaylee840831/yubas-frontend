@@ -8,7 +8,7 @@ type InvoiceType = 'personal' | 'company';
 
 @Component({
   selector: 'app-bill',
-  imports: [ CommonModule, FormsModule, MatRadioModule ],
+  imports: [CommonModule, FormsModule, MatRadioModule],
   templateUrl: './bill.html',
   styleUrl: './bill.css',
 })
@@ -16,7 +16,7 @@ export class Bill {
   bill: BillInfo = {
     number: '',
     company: '',
-    address: ''
+    address: '',
   };
 
   invoiceType: InvoiceType = 'personal';
@@ -30,7 +30,7 @@ export class Bill {
     this.bill = {
       number: '',
       company: '',
-      address: ''
+      address: '',
     };
 
     this.emitBill();

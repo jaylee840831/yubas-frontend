@@ -8,9 +8,8 @@ describe('CustomSlider', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CustomSlider]
-    })
-    .compileComponents();
+      imports: [CustomSlider],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(CustomSlider);
     component = fixture.componentInstance;

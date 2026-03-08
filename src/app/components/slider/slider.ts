@@ -7,93 +7,93 @@ import { interval, Subscription } from 'rxjs';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './slider.html',
-  styleUrls: ['./slider.css']
+  styleUrls: ['./slider.css'],
 })
 export class Slider implements OnInit, OnDestroy {
   slides = [
     {
       title: '五人座休旅車',
       subtitle: '適合1~3位搭乘',
-      quotation_list:[
+      quotation_list: [
         {
-          location:'基隆市區 - 桃園機場',
-          price:'NT$1,600元起'
+          location: '基隆市區 - 桃園機場',
+          price: 'NT$1,600元起',
         },
         {
-          location:'台北市區 - 桃園機場',
-          price:'NT$1,200元起'
+          location: '台北市區 - 桃園機場',
+          price: 'NT$1,200元起',
         },
         {
-          location:'新竹市區 - 桃園機場',
-          price:'NT$1,600元起'
+          location: '新竹市區 - 桃園機場',
+          price: 'NT$1,600元起',
         },
         {
-          location:'台中市區 - 桃園機場',
-          price:'NT$2,400元起'
-        }
+          location: '台中市區 - 桃園機場',
+          price: 'NT$2,400元起',
+        },
       ],
-      image: 'assets/car_seat_5.avif'
+      image: 'assets/car_seat_5.avif',
     },
     {
       title: '七人座商務車',
       subtitle: '適合1~4位搭乘',
-      quotation_list:[
+      quotation_list: [
         {
-          location:'基隆市區 - 桃園機場',
-          price:'NT$1,700元起'
+          location: '基隆市區 - 桃園機場',
+          price: 'NT$1,700元起',
         },
         {
-          location:'台北市區 - 桃園機場',
-          price:'NT$1,300元起'
+          location: '台北市區 - 桃園機場',
+          price: 'NT$1,300元起',
         },
         {
-          location:'新竹市區 - 桃園機場',
-          price:'NT$1,700元起'
+          location: '新竹市區 - 桃園機場',
+          price: 'NT$1,700元起',
         },
         {
-          location:'台中市區 - 桃園機場',
-          price:'NT$2,800元起'
-        }
+          location: '台中市區 - 桃園機場',
+          price: 'NT$2,800元起',
+        },
       ],
-      image: 'assets/car_seat_7.avif'
+      image: 'assets/car_seat_7.avif',
     },
     {
       title: '九人座商務車',
       subtitle: '適合4~8位搭乘',
-      quotation_list:[
+      quotation_list: [
         {
-          location:'基隆市區 - 桃園機場',
-          price:'NT$2,000元起'
+          location: '基隆市區 - 桃園機場',
+          price: 'NT$2,000元起',
         },
         {
-          location:'台北市區 - 桃園機場',
-          price:'NT$1,500元起'
+          location: '台北市區 - 桃園機場',
+          price: 'NT$1,500元起',
         },
         {
-          location:'新竹市區 - 桃園機場',
-          price:'NT$1,900元起'
+          location: '新竹市區 - 桃園機場',
+          price: 'NT$1,900元起',
         },
         {
-          location:'台中市區 - 桃園機場',
-          price:'NT$3,000元起'
-        }
+          location: '台中市區 - 桃園機場',
+          price: 'NT$3,000元起',
+        },
       ],
-      image: 'assets/car_seat_9.avif'
-    }
+      image: 'assets/car_seat_9.avif',
+    },
   ];
 
   constructor(private cdr: ChangeDetectorRef) {}
 
   currentIndex = 0;
   interval$?: Subscription;
-  intervalVal: number=0;
+  intervalVal: number = 0;
 
   ngOnInit() {
     this.startAutoPlay();
   }
 
   ngOnDestroy() {
-    if(this.interval$ != null){
+    if (this.interval$ != null) {
       this.interval$.unsubscribe();
     }
   }
@@ -110,12 +110,11 @@ export class Slider implements OnInit, OnDestroy {
 
   startAutoPlay() {
     this.stopAutoPlay();
-    this.interval$ = interval(5000)
-      .subscribe(res => this.nextSlide());
+    this.interval$ = interval(5000).subscribe((res) => this.nextSlide());
   }
 
   stopAutoPlay() {
-    if(this.interval$ != null){
+    if (this.interval$ != null) {
       this.interval$.unsubscribe();
     }
   }

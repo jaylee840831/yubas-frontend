@@ -8,9 +8,8 @@ describe('NoHeaderFooterLayout', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NoHeaderFooterLayout]
-    })
-    .compileComponents();
+      imports: [NoHeaderFooterLayout],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(NoHeaderFooterLayout);
     component = fixture.componentInstance;

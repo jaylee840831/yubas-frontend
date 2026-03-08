@@ -27,18 +27,13 @@
               "src/favicon.ico",
               "src/assets"
             ],
-            "styles": [
-              "src/material-theme.scss",
-              "src/styles.css"
-            ],
+            "styles": ["src/material-theme.scss", "src/styles.css"],
             "server": "src/main.server.ts",
             "outputMode": "server",
             "ssr": {
               "entry": "src/server.ts"
             },
-            "allowedCommonJsDependencies": [
-              "@mapbox/polyline"
-            ]
+            "allowedCommonJsDependencies": ["@mapbox/polyline"]
           },
           "configurations": {
             "production": {

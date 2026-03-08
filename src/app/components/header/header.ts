@@ -32,7 +32,7 @@ export class Header {
   }
 
   toggleBlogMenu(event: MouseEvent) {
-    event.stopPropagation();   // 防止被 document click 關掉
+    event.stopPropagation(); // 防止被 document click 關掉
     this.blogMenuOpen = !this.blogMenuOpen;
   }
 
@@ -62,35 +62,32 @@ export class Header {
   // 監聽整個文件的點擊
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
-    if (!this.blogMenuOpen && !this.businessMenuOpen && !this.menuOpen && !this.userMenuOpen) return;
+    if (!this.blogMenuOpen && !this.businessMenuOpen && !this.menuOpen && !this.userMenuOpen)
+      return;
 
     // main menu
-    const clickedInsideMainMenu =
-      this.mainMenu.nativeElement.contains(event.target);
+    const clickedInsideMainMenu = this.mainMenu.nativeElement.contains(event.target);
 
     if (!clickedInsideMainMenu) {
       this.menuOpen = false;
     }
-    
+
     // blog menu
-    const clickedInsideBlogMenu =
-      this.blogMenu.nativeElement.contains(event.target);
+    const clickedInsideBlogMenu = this.blogMenu.nativeElement.contains(event.target);
 
     if (!clickedInsideBlogMenu) {
       this.blogMenuOpen = false;
     }
 
     // business menu
-    const clickedInsideBusinessMenu =
-      this.businessMenu.nativeElement.contains(event.target);
+    const clickedInsideBusinessMenu = this.businessMenu.nativeElement.contains(event.target);
 
     if (!clickedInsideBusinessMenu) {
       this.businessMenuOpen = false;
     }
 
     // user menu
-    const clickedInsideUserMenu =
-      this.userMenu.nativeElement.contains(event.target);
+    const clickedInsideUserMenu = this.userMenu.nativeElement.contains(event.target);
 
     if (!clickedInsideUserMenu) {
       this.userMenuOpen = false;

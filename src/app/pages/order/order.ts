@@ -1,6 +1,15 @@
 import { Component, ViewChild, OnInit, NgZone } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormArray, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+  FormArray,
+  AbstractControl,
+  ValidationErrors,
+  ValidatorFn,
+} from '@angular/forms';
 import { MatStepperModule, MatStepper } from '@angular/material/stepper';
 import { MatButtonModule } from '@angular/material/button';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -19,7 +28,7 @@ import { BillInfo, CarType, LocationItem, PaymentInfo } from '../../models/order
 
 // 驗證時間
 export const timeRangeValidator: ValidatorFn = (
-  group: AbstractControl
+  group: AbstractControl,
 ): ValidationErrors | null => {
   const rideTime = group.get('rideTime')?.value;
   const endTime = group.get('endTime')?.value;
@@ -63,12 +72,12 @@ export const timeRangeValidator: ValidatorFn = (
     Map,
     CarSelector,
     PaymentSelector,
-    Bill
+    Bill,
   ],
   templateUrl: './order.html',
   styleUrl: './order.css',
 })
-export class Order implements OnInit{
+export class Order implements OnInit {
   TYPE_AIRPORT = 'airport';
   TYPE_CITY = 'city';
   TYPE_CHARTER = 'charter';
@@ -84,40 +93,40 @@ export class Order implements OnInit{
   charterTimes = [
     { value: 4, label: '4小時' },
     { value: 8, label: '8小時' },
-    { value: 12, label: '12小時' }
+    { value: 12, label: '12小時' },
   ];
 
   locations: LocationItem[] = [
     {
       name: '目前位置',
       lat: 0,
-      lng: 0
+      lng: 0,
     },
     {
       name: '桃園國際機場 第一航廈(TPE)',
       lat: 25.081515816647617,
-      lng: 121.23910878868612
+      lng: 121.23910878868612,
     },
     {
       name: '桃園國際機場 第二航廈(TPE)',
       lat: 25.077077463138977,
-      lng: 121.2324074293579
+      lng: 121.2324074293579,
     },
     {
       name: '台北松山機場(TSA)',
       lat: 25.0697,
-      lng: 121.5526
+      lng: 121.5526,
     },
     {
       name: '台中清泉崗機場(RMQ)',
       lat: 24.256416561710555,
-      lng: 120.6007469029024
+      lng: 120.6007469029024,
     },
     {
       name: '高雄小港機場(KHH)',
       lat: 22.5771,
-      lng: 120.3495
-    }
+      lng: 120.3495,
+    },
   ];
 
   filteredPickupOptions!: Observable<LocationItem[]>;
@@ -128,30 +137,33 @@ export class Order implements OnInit{
     private fb: FormBuilder,
     private zone: NgZone,
     private route: ActivatedRoute,
-    private dialog: MatDialog
+    private dialog: MatDialog,
   ) {
-    this.bookingForm = this.fb.group({
-      pickup: ['', Validators.required],
-      dropoff: ['', Validators.required],
-      waypoints: this.fb.array([]), // 中途停靠點
-      airplaneNumber: ['', Validators.required],
-      note: ['', Validators.required],
-      charterTime: [8, Validators.required], // 包車時長
-      rideTime: ['', Validators.required], // 開始時間
-      endTime: ['', Validators.required], // 結束時間
-      adults: [1],
-      children: [0],
-      childSeat: [0],
-      boosterSeat: [0],
-      meetAndGreet: [''],
-      luggage20: [0],
-      luggage24: [0],
-      luggage28: [0],
-      specialRequests: [''], // 備註
-      carType: [null], // 選擇車型
-      payment: [null], // 付款方式
-      bill: [null] // 發票
-    }, { validators: timeRangeValidator });
+    this.bookingForm = this.fb.group(
+      {
+        pickup: ['', Validators.required],
+        dropoff: ['', Validators.required],
+        waypoints: this.fb.array([]), // 中途停靠點
+        airplaneNumber: ['', Validators.required],
+        note: ['', Validators.required],
+        charterTime: [8, Validators.required], // 包車時長
+        rideTime: ['', Validators.required], // 開始時間
+        endTime: ['', Validators.required], // 結束時間
+        adults: [1],
+        children: [0],
+        childSeat: [0],
+        boosterSeat: [0],
+        meetAndGreet: [''],
+        luggage20: [0],
+        luggage24: [0],
+        luggage28: [0],
+        specialRequests: [''], // 備註
+        carType: [null], // 選擇車型
+        payment: [null], // 付款方式
+        bill: [null], // 發票
+      },
+      { validators: timeRangeValidator },
+    );
   }
 
   get waypoints() {
@@ -169,21 +181,21 @@ export class Order implements OnInit{
   onCarSelected(car: CarType) {
     // console.log('選擇車型:', car);
     this.bookingForm.patchValue({
-      carType: car
+      carType: car,
     });
   }
 
   onPaymentSelected(method: PaymentInfo) {
     // console.log('付款方式:', method);
     this.bookingForm.patchValue({
-      payment: method
+      payment: method,
     });
   }
 
   onBillChange(bill: BillInfo) {
     // console.log('發票資訊:', bill);
     this.bookingForm.patchValue({
-      bill: bill
+      bill: bill,
     });
   }
 
@@ -234,9 +246,9 @@ export class Order implements OnInit{
             {
               name: '目前位置',
               lat: lat,
-              lng: lng
+              lng: lng,
             },
-            ...this.locations.filter(loc => loc.name !== '目前位置')
+            ...this.locations.filter((loc) => loc.name !== '目前位置'),
           ];
 
           this.bookingForm.get('pickup')?.updateValueAndValidity();
@@ -258,8 +270,8 @@ export class Order implements OnInit{
       {
         enableHighAccuracy: true, // 高精度
         timeout: 15000,
-        maximumAge: 0 // 不使用快取
-      }
+        maximumAge: 0, // 不使用快取
+      },
     );
   }
 
@@ -268,9 +280,9 @@ export class Order implements OnInit{
       case error.PERMISSION_DENIED:
         alert(
           '您已拒絕定位權限。\n\n' +
-          '請到手機設定中開啟定位權限。\n\n' +
-          'iPhone：設定 → Safari → 位置 → 允許\n' +
-          'Android：設定 → 位置 → 開啟'
+            '請到手機設定中開啟定位權限。\n\n' +
+            'iPhone：設定 → Safari → 位置 → 允許\n' +
+            'Android：設定 → 位置 → 開啟',
         );
         break;
       case error.POSITION_UNAVAILABLE:
@@ -286,18 +298,18 @@ export class Order implements OnInit{
 
   // 不同種類的表單, 移除不需要的欄位驗證
   removeUnusedFieldValidations() {
-    if(this.currentFormType === this.TYPE_AIRPORT) {
+    if (this.currentFormType === this.TYPE_AIRPORT) {
       this.bookingForm.get('charterTime')?.clearValidators();
       this.bookingForm.get('endTime')?.clearValidators();
       this.bookingForm.get('note')?.clearValidators();
     }
-    if(this.currentFormType === this.TYPE_CITY) {
+    if (this.currentFormType === this.TYPE_CITY) {
       this.bookingForm.get('charterTime')?.clearValidators();
       this.bookingForm.get('endTime')?.clearValidators();
       this.bookingForm.get('note')?.clearValidators();
       this.bookingForm.get('airplaneNumber')?.clearValidators();
     }
-    if(this.currentFormType === this.TYPE_CHARTER) {
+    if (this.currentFormType === this.TYPE_CHARTER) {
       this.bookingForm.get('airplaneNumber')?.clearValidators();
     }
 
@@ -312,13 +324,13 @@ export class Order implements OnInit{
     const control = this.bookingForm.get(controlName);
 
     // 驗證時間
-    if(controlName === 'rideTime') {
+    if (controlName === 'rideTime') {
       if (this.bookingForm.hasError('rideTimePast')) {
         return true;
       }
     }
 
-    if(controlName === 'rideTime' || controlName === 'endTime') {
+    if (controlName === 'rideTime' || controlName === 'endTime') {
       if (this.bookingForm.hasError('timeRangeInvalid')) {
         return true;
       }
@@ -332,32 +344,32 @@ export class Order implements OnInit{
     this.removeUnusedFieldValidations();
 
     // 驗證表單資料
-    if(this.bookingForm.invalid) {
+    if (this.bookingForm.invalid) {
       this.bookingForm.markAllAsTouched();
 
       window.scrollTo({
         top: 0,
-        behavior: 'smooth'
+        behavior: 'smooth',
       });
 
       return;
     } else {
       const coords: number[][] = [];
-  
+
       // 起點
       const pickup = this.getLocation(this.bookingForm.value.pickup);
       if (pickup) coords.push([pickup.lng, pickup.lat]);
-  
+
       // 中途點
       this.bookingForm.value.waypoints.forEach((name: string) => {
         const wp = this.getLocation(name);
         if (wp) coords.push([wp.lng, wp.lat]);
       });
-  
+
       // 終點
       const dropoff = this.getLocation(this.bookingForm.value.dropoff);
       if (dropoff) coords.push([dropoff.lng, dropoff.lat]);
-      
+
       // 傳給 map 元件畫路徑, 前往訂單下一步驟
       if (coords.length >= 2) {
         // console.log('送出座標', coords);
@@ -368,41 +380,37 @@ export class Order implements OnInit{
   }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params) => {
       // console.log(params['type']);
       this.currentFormType = params['type'];
     });
 
     this.filteredPickupOptions = this.bookingForm.get('pickup')!.valueChanges.pipe(
       startWith(''),
-      map(value => {
+      map((value) => {
         const name = typeof value === 'string' ? value : value?.name;
         return this._filter(name || '');
-      })
+      }),
     );
 
     this.filteredDropoffOptions = this.bookingForm.get('dropoff')!.valueChanges.pipe(
       startWith(''),
-      map(value => {
+      map((value) => {
         const name = typeof value === 'string' ? value : value?.name;
         return this._filter(name || '');
-      })
+      }),
     );
   }
 
   private getLocation(name: string) {
-    return this.locations.find(loc => loc.name === name);
+    return this.locations.find((loc) => loc.name === name);
   }
 
   private _filter(value: any): LocationItem[] {
     const filterValue =
-      typeof value === 'string'
-      ? value.toLowerCase()
-      : value?.name?.toLowerCase() || '';
+      typeof value === 'string' ? value.toLowerCase() : value?.name?.toLowerCase() || '';
 
-    return this.locations.filter(option =>
-      option.name.toLowerCase().includes(filterValue)
-    );
+    return this.locations.filter((option) => option.name.toLowerCase().includes(filterValue));
   }
 
   // 計數器(加)
@@ -429,8 +437,8 @@ export class Order implements OnInit{
       this.filteredWaypointsOptions.push(
         control.valueChanges.pipe(
           startWith(''),
-          map(value => this._filter(value))
-        )
+          map((value) => this._filter(value)),
+        ),
       );
     }
   }

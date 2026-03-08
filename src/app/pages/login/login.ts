@@ -8,7 +8,7 @@ import { CommonService } from '../../service/common-service';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ CommonModule, ReactiveFormsModule ],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
@@ -31,24 +31,17 @@ export class Login implements OnInit {
         '',
         [
           Validators.required,
-          Validators.pattern(/^09\d{8}$/) // 台灣手機格式
-        ]
+          Validators.pattern(/^09\d{8}$/), // 台灣手機格式
+        ],
       ],
-      username: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(1),
-          Validators.maxLength(10)
-        ]
-      ],
+      username: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
       captcha: [
         '',
         [
           Validators.required,
-          Validators.pattern(/^[A-Za-z0-9]{6}$/) // 6碼英數
-        ]
-      ]
+          Validators.pattern(/^[A-Za-z0-9]{6}$/), // 6碼英數
+        ],
+      ],
     });
   }
 
@@ -87,7 +80,7 @@ export class Login implements OnInit {
       duration: 3000,
       horizontalPosition: 'center',
       verticalPosition: 'top',
-      panelClass: [styleClass]
+      panelClass: [styleClass],
     });
   }
 
@@ -104,20 +97,20 @@ export class Login implements OnInit {
     const submitter = event.submitter as HTMLButtonElement;
 
     if (submitter.value === 'login') {
-      if(username === '小明' && phone === '0912345678' && captcha === 'abc123') {
+      if (username === '小明' && phone === '0912345678' && captcha === 'abc123') {
         this.showAlert('登入成功', '', 'snackbar-success');
 
         localStorage.setItem(
           'userInfo',
           JSON.stringify({
             userToken: this.commonService.encodeBase64(username + ':' + phone),
-            loginTime: new Date()
-          })
+            loginTime: new Date(),
+          }),
         );
 
         this.router.navigate(['/']);
       } else {
-        this.showAlert('登入失敗', '', 'snackbar-error')
+        this.showAlert('登入失敗', '', 'snackbar-error');
       }
     } else if (submitter.value === 'register') {
       this.showAlert('註冊成功', '', 'snackbar-success');
@@ -126,8 +119,8 @@ export class Login implements OnInit {
         'userInfo',
         JSON.stringify({
           userToken: this.commonService.encodeBase64(username + ':' + phone),
-          loginTime: new Date()
-        })
+          loginTime: new Date(),
+        }),
       );
 
       this.router.navigate(['/']);

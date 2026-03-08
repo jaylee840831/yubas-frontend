@@ -5,9 +5,7 @@ import { CommonService } from './common-service';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(
-    private commonService: CommonService
-  ){}
+  constructor(private commonService: CommonService) {}
 
   getUser(): any {
     if (typeof window !== 'undefined') {
@@ -18,9 +16,9 @@ export class AuthService {
   }
 
   getUsername(): string {
-    const userInfo =  this.getUser() || null;
+    const userInfo = this.getUser() || null;
 
-    if(userInfo != null) {
+    if (userInfo != null) {
       const token = this.commonService.decodeBase64(userInfo.userToken).split(':');
       return token[0];
     }
@@ -29,9 +27,9 @@ export class AuthService {
   }
 
   getUserPhone(): string {
-    const userInfo =  this.getUser() || null;
+    const userInfo = this.getUser() || null;
 
-    if(userInfo != null) {
+    if (userInfo != null) {
       const token = this.commonService.decodeBase64(userInfo.userToken).split(':');
       return token[1];
     }

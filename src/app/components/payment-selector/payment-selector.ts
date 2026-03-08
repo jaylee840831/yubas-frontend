@@ -16,7 +16,7 @@ export class PaymentSelector implements OnInit {
   payments = [
     { label: '現金', value: 'cash' },
     { label: '信用卡支付', value: 'creditCard' },
-    { label: 'Line Pay', value: 'linePay' }
+    { label: 'Line Pay', value: 'linePay' },
   ];
 
   selectedValue: PaymentInfo = this.payments[0];

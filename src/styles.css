@@ -2,18 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-
 /* Reset & Base */
-* { 
-  margin:0;
-  padding:0; 
+* {
+  margin: 0;
+  padding: 0;
   line-height: 1.5;
-  box-sizing:border-box; 
-  color:#fff;
+  box-sizing: border-box;
+  color: #fff;
 }
 
-body, html {  
-  font-family: Arial, Helvetica, sans-serif; 
+body,
+html {
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
   height: 100%;
 }
@@ -27,41 +27,56 @@ body {
 /* 背景圖 */
 body {
   background-image: url(assets/main_background.avif);
-  background-size:cover;
+  background-size: cover;
   background-position: top center;
   background-repeat: no-repeat;
   background-attachment: fixed; /* 滾動時背景固定 */
 }
 
 /* Container */
-.container { 
-  width:90%; 
-  max-width:1200px; 
-  margin:0 auto;
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5 {
   font-weight: bold;
 }
 
-h5, .h5{
+h5,
+.h5 {
   font-size: 1.25rem;
 }
 
-.h4, h4 {
-  font-size: calc(1.5rem + .3vw);
+.h4,
+h4 {
+  font-size: calc(1.5rem + 0.3vw);
 }
 
-.h3, h3 {
-  font-size: calc(2rem + .3vw);
+.h3,
+h3 {
+  font-size: calc(2rem + 0.3vw);
 }
 
-.h2, h2 {
-  font-size: calc(2.5rem + .3vw);
+.h2,
+h2 {
+  font-size: calc(2.5rem + 0.3vw);
 }
 
-.h1, h1 {
-  font-size: calc(3rem + .3vw);
+.h1,
+h1 {
+  font-size: calc(3rem + 0.3vw);
 }
 
 .grid-container {
@@ -71,34 +86,34 @@ h5, .h5{
   justify-content: center;
 }
 
-.card { 
-  background-color: rgba(0,0,0,0.7); 
-  padding:1rem; 
-  border-radius:6px; 
+.card {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 1rem;
+  border-radius: 6px;
   border: 1px gray solid;
 }
 
-.card p{
+.card p {
   color: rgb(181, 184, 255);
 }
 
-.card-image{
+.card-image {
   width: 100%;
-  aspect-ratio: 16 / 9;  /* 控制卡片圖片比例 */
-  overflow: hidden;     /* 裁切超出部分 */
+  aspect-ratio: 16 / 9; /* 控制卡片圖片比例 */
+  overflow: hidden; /* 裁切超出部分 */
   border-radius: 6px 6px 0 0;
 }
 
-.card-image img{
+.card-image img {
   width: 100%;
   height: 100%;
-  object-fit: contain;    /* 填滿不變形 */
+  object-fit: contain; /* 填滿不變形 */
   display: block;
 }
 
-.arrow-card{
-  position: relative;      /* 讓偽元素相對於父元素定位 */
-  display: inline-block;   /* 或 block，依需求 */
+.arrow-card {
+  position: relative; /* 讓偽元素相對於父元素定位 */
+  display: inline-block; /* 或 block，依需求 */
 }
 
 /* 卡片的箭頭圖案 */
@@ -129,7 +144,7 @@ a {
   color: inherit; /* 保留文字顏色 */
 }
 
-.line-clamp-1{
+.line-clamp-1 {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
@@ -137,7 +152,7 @@ a {
   overflow: hidden;
 }
 
-.line-clamp-3{
+.line-clamp-3 {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
@@ -161,15 +176,15 @@ a {
   flex-direction: column;
 }
 
-.mat-mdc-autocomplete-panel{
+.mat-mdc-autocomplete-panel {
   background: rgba(31, 41, 55) !important;
 }
 
-.mat-mdc-option{
+.mat-mdc-option {
   background: rgba(31, 41, 55) !important;
 }
 
-.mdc-list-item__primary-text{
+.mdc-list-item__primary-text {
   color: white !important;
 }
 
@@ -177,8 +192,7 @@ a {
   font-size: 16px !important;
 }
 
-.mat-mdc-radio-button.mat-mdc-radio-disabled 
-.mdc-radio__outer-circle {
+.mat-mdc-radio-button.mat-mdc-radio-disabled .mdc-radio__outer-circle {
   border-color: #cbd5e1 !important;
 }
 
@@ -191,23 +205,28 @@ a {
 }
 
 @media (min-width: 1200px) {
-  h5, .h5{
+  h5,
+  .h5 {
     font-size: 1.25rem;
   }
 
-  .h4, h4 {
+  .h4,
+  h4 {
     font-size: 1.5rem;
   }
 
-  .h3, h3 {
+  .h3,
+  h3 {
     font-size: 2rem;
   }
 
-  .h2, h2 {
+  .h2,
+  h2 {
     font-size: 2.5rem;
   }
 
-  .h1, h1 {
+  .h1,
+  h1 {
     font-size: 3rem;
   }
 }
@@ -216,14 +235,14 @@ a {
   /* 背景圖 */
   body {
     background-image: url(assets/main_background.avif);
-    background-size:contain;
+    background-size: contain;
     background-repeat: repeat;
     background-attachment: fixed; /* 滾動時背景固定 */
   }
 }
 
 @media (max-width: 768px) {
-  html{
+  html {
     font-size: 15px;
   }
 }
@@ -236,16 +255,16 @@ a {
   /* 背景圖 */
   body {
     background-image: url(assets/main_background_mobile.avif);
-    background-size:contain;
+    background-size: contain;
     background-repeat: repeat;
     background-attachment: fixed; /* 滾動時背景固定 */
   }
 
   .arrow-card::after {
-    content: "";
+    content: '';
     position: absolute;
-    top: 90%;       
-    right: 35%;       
+    top: 90%;
+    right: 35%;
     transform: translateX(-50%);
     animation: arrowMoveDown 2s infinite linear;
     z-index: 1000;
@@ -259,7 +278,13 @@ a {
   }
 
   @keyframes arrowMoveDown {
-    0%, 50%, 100% { transform: translateX(-50%) translateY(0); }
-    25% { transform: translateX(-50%) translateY(20px); }
+    0%,
+    50%,
+    100% {
+      transform: translateX(-50%) translateY(0);
+    }
+    25% {
+      transform: translateX(-50%) translateY(20px);
+    }
   }
 }

@@ -10,8 +10,8 @@ bootstrapApplication(App, {
       routes,
       withHashLocation(),
       withInMemoryScrolling({
-          scrollPositionRestoration: 'top'
-        })
-      )
-  ]
+        scrollPositionRestoration: 'top',
+      }),
+    ),
+  ],
 });

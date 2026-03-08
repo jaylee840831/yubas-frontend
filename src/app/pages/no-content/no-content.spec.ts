@@ -8,9 +8,8 @@ describe('NoContent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NoContent]
-    })
-    .compileComponents();
+      imports: [NoContent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(NoContent);
     component = fixture.componentInstance;

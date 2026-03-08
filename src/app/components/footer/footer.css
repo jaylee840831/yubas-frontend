@@ -1,42 +1,43 @@
 /* Footer */
-footer { 
-  background:#343a40; 
+footer {
+  background: #343a40;
   font-size: 12px;
-  text-align:center; 
-  padding:0.5rem 0; 
-  bottom: 0;        /* 底部對齊 */
+  text-align: center;
+  padding: 0.5rem 0;
+  bottom: 0; /* 底部對齊 */
   left: 0;
-  width: 100%;      /* 滿寬 */
+  width: 100%; /* 滿寬 */
 }
 
-.contact-information-container{
-  display: flex; 
-  justify-content: space-between; 
+.contact-information-container {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
 }
 
-.contact-information{
+.contact-information {
   padding: 0 0 1rem 0;
 }
 
-.contact-information p, a{
+.contact-information p,
+a {
   color: lightgray;
   margin: 5px 0;
 }
 
-.contact-information a{
+.contact-information a {
   font-weight: bold;
 }
 
-.logo-image{
+.logo-image {
   width: 80px !important;
   height: 80px !important;
   border-radius: 50% !important;
   margin: 0 auto !important;
 }
 
-.social-media-image{
+.social-media-image {
   width: 35px !important;
   height: 35px !important;
   border-radius: 50% !important;
@@ -45,11 +46,11 @@ footer {
   background: white;
 }
 
-.social-media-image:active{
+.social-media-image:active {
   filter: brightness(0.85);
 }
 
-.grid-5-container{
+.grid-5-container {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 1rem;
@@ -57,9 +58,9 @@ footer {
 }
 
 @media (max-width: 752px) {
-  .contact-information-container{
-    display: flex; 
-    justify-content: center; 
+  .contact-information-container {
+    display: flex;
+    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
   }

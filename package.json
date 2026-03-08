@@ -1,6 +1,7 @@
 {
   "name": "yubas-frontend",
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "build:gh": "ng build --configuration production --base-href /yubas-frontend/",
     "deploy:gh": "npx angular-cli-ghpages --dir=dist/yubas-frontend/browser",
@@ -9,7 +10,10 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:yubas-frontend": "node dist/yubas-frontend/server/server.mjs"
+    "serve:ssr:yubas-frontend": "node dist/yubas-frontend/server/server.mjs",
+    "lint": "eslint . --ext .ts,.html",
+    "lint:fix": "eslint . --ext .ts,.html --fix",
+    "format": "prettier --write ."
   },
   "prettier": {
     "printWidth": 100,
@@ -42,6 +46,9 @@
     "tslib": "^2.3.0"
   },
   "devDependencies": {
+    "@angular-eslint/eslint-plugin": "^21.3.0",
+    "@angular-eslint/eslint-plugin-template": "^21.3.0",
+    "@angular-eslint/template-parser": "^21.3.0",
     "@angular/build": "^21.1.1",
     "@angular/cli": "^21.1.1",
     "@angular/compiler-cli": "^21.1.0",
@@ -49,9 +56,15 @@
     "@types/express": "^5.0.1",
     "@types/mapbox__polyline": "^1.0.5",
     "@types/node": "^20.17.19",
+    "@typescript-eslint/eslint-plugin": "^8.56.1",
+    "@typescript-eslint/parser": "^8.56.1",
     "autoprefixer": "^10.4.24",
+    "eslint": "^10.0.3",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
     "jsdom": "^27.1.0",
     "postcss": "^8.5.6",
+    "prettier": "^3.8.1",
     "tailwindcss": "^3.4.17",
     "typescript": "~5.9.2",
     "vitest": "^4.0.8"

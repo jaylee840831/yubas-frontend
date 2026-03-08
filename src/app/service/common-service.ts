@@ -12,7 +12,7 @@ export class CommonService {
   decodeBase64(base64Str: string): string {
     const bytes = atob(base64Str)
       .split('')
-      .map(c => c.charCodeAt(0));
+      .map((c) => c.charCodeAt(0));
     return new TextDecoder().decode(new Uint8Array(bytes));
   }
 }

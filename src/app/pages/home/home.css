@@ -1,8 +1,8 @@
 /* .main-container Grid */
 .main-container {
-  background-color: rgba(0,0,0,0.9);
-  min-height:calc(100vh - 140px); 
-  padding:10px 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  min-height: calc(100vh - 140px);
+  padding: 10px 0;
   margin: 35% 0 0 0;
 }
 
@@ -13,36 +13,36 @@
   color: gold;
 }
 
-.content-container{
+.content-container {
   display: flex;
   flex-direction: column;
   justify-content: center; /* 水平置中 */
   align-items: center;
   white-space: pre-line;
-  text-align: center; 
+  text-align: center;
   margin: 10px 0 3rem 0;
 }
 
-.content-container button{
+.content-container button {
   padding: 1rem 5rem 1rem 5rem;
   border-radius: 30px;
   background: goldenrod;
 }
 
-.grid-4-container{
+.grid-4-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* 每行 4 個，平均分配寬度 */
-  gap: 2rem;  
+  gap: 2rem;
   justify-content: center;
 }
 
-.slideTemplate img{
+.slideTemplate img {
   max-width: 80%;
   height: auto;
   border-radius: 15px;
 }
 
-.circle-image{
+.circle-image {
   width: 100px !important;
   height: 100px !important;
   border-radius: 50% !important;
@@ -50,21 +50,21 @@
 }
 
 @media (max-width: 1280px) {
-  .main-container { 
-    min-height:calc(100vh - 140px); 
-    padding:10px 0;
+  .main-container {
+    min-height: calc(100vh - 140px);
+    padding: 10px 0;
     margin: 600px 0 0 0;
   }
 }
 
 @media (max-width: 1024px) {
-  .main-container { 
-    min-height:calc(100vh - 140px); 
-    padding:10px 0;
+  .main-container {
+    min-height: calc(100vh - 140px);
+    padding: 10px 0;
     margin: 400px 0 0 0;
   }
 
-  .grid-4-container{
+  .grid-4-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 320px));
     gap: 1.5rem;
@@ -73,13 +73,13 @@
 }
 
 @media (max-width: 752px) {
-  .main-container { 
-    min-height:calc(100vh - 140px); 
-    padding:10px 0;
+  .main-container {
+    min-height: calc(100vh - 140px);
+    padding: 10px 0;
     margin: 450px 0 0 0;
   }
 
-  .slideTemplate img{
+  .slideTemplate img {
     max-width: 100%;
     height: auto;
     border-radius: 15px;

@@ -16,7 +16,7 @@ export class DialogService {
       maxWidth: '1200px',
       height: '90vh',
       maxHeight: '90vh',
-      panelClass: 'dark-dialog'
+      panelClass: 'dark-dialog',
     });
 
     return ref.afterClosed();

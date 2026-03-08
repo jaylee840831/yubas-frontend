@@ -7,7 +7,7 @@ import { interval, Subscription } from 'rxjs';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './custom-slider.html',
-  styleUrls: ['./custom-slider.css']
+  styleUrls: ['./custom-slider.css'],
 })
 export class CustomSlider implements OnInit, OnDestroy {
   @Input() arrowShow = false;

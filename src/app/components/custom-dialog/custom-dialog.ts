@@ -8,16 +8,14 @@ export interface ConfirmDialogData {
 
 @Component({
   selector: 'app-custom-dialog',
-  imports: [
-    MatDialogModule
-  ],
+  imports: [MatDialogModule],
   templateUrl: './custom-dialog.html',
   styleUrl: './custom-dialog.css',
 })
 export class CustomDialog {
   constructor(
     public dialogRef: MatDialogRef<CustomDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: ConfirmDialogData
+    @Inject(MAT_DIALOG_DATA) public data: ConfirmDialogData,
   ) {}
 
   onConfirm() {
