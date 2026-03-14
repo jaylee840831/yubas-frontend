@@ -7,14 +7,14 @@ export interface ConfirmDialogData {
 }
 
 @Component({
-  selector: 'app-custom-dialog',
+  selector: 'app-confirm-dialog',
   imports: [MatDialogModule],
-  templateUrl: './custom-dialog.html',
-  styleUrl: './custom-dialog.css',
+  templateUrl: './confirm-dialog.html',
+  styleUrl: './confirm-dialog.css',
 })
-export class CustomDialog {
+export class ConfirmDialog {
   constructor(
-    public dialogRef: MatDialogRef<CustomDialog>,
+    public dialogRef: MatDialogRef<ConfirmDialog>,
     @Inject(MAT_DIALOG_DATA) public data: ConfirmDialogData,
   ) {}
 

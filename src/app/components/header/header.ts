@@ -2,6 +2,7 @@ import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../service/auth-service';
+import { CommonService } from '../../service/common-service';
 
 @Component({
   selector: 'app-header',
@@ -21,7 +22,16 @@ export class Header {
   @ViewChild('businessMenu') businessMenu!: ElementRef;
   @ViewChild('mainMenu') mainMenu!: ElementRef;
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private commonService: CommonService,
+  ) {}
+
+  ngAfterViewInit() {
+    // set header height
+    const height = this.mainMenu.nativeElement.offsetHeight;
+    this.commonService.setHeaderHeight(height);
+  }
 
   ngOnInit() {
     this.userName = this.authService.getUsername();

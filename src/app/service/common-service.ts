@@ -1,9 +1,17 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CommonService {
+  private headerHeightSource = new BehaviorSubject<number>(0);
+  headerHeight$ = this.headerHeightSource.asObservable();
+
+  setHeaderHeight(height: number) {
+    setTimeout(() => this.headerHeightSource.next(height));
+  }
+
   encodeBase64(str: string): string {
     const bytes = new TextEncoder().encode(str);
     return btoa(String.fromCharCode(...bytes));

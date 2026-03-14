@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { DialogService } from '../../service/dialog-service';
 
 @Component({
   selector: 'app-footer',
@@ -9,6 +10,10 @@ import { CommonModule } from '@angular/common';
   styleUrl: './footer.css',
 })
 export class Footer {
+  constructor(
+    public dialogService: DialogService,
+  ){}
+
   go_to_line_call() {
     window.open('https://line.me/R/oa/call/@671pygmo?confirmation=true&from=call_url', '_blank');
   }

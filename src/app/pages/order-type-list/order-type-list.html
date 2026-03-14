@@ -1,6 +1,6 @@
 <div class="min-h-screen flex items-center justify-center bg-gray-900 p-4">
   <div class="container">
-    <div class="grid-container mt-[8vh]">
+    <div class="grid-container" [style.margin-top.px]="commonService.headerHeight$ | async">
       <div class="card" *ngFor="let order of orders" style="background: #0b2f5b">
         <div class="card-image">
           <img [src]="order.imageUrl" [alt]="order.title" />

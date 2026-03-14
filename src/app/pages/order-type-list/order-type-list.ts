@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { CommonService } from '../../service/common-service';
 
 interface OrderItem {
   title: string;
@@ -23,7 +24,12 @@ const TYPE_LINE = 'line';
   styleUrl: './order-type-list.css',
 })
 export class OrderTypeList {
-  constructor(private router: Router) {}
+  constructor(
+    public commonService: CommonService,
+    private router: Router,
+  ) {}
+
+  headerHeight = 0;
 
   orders: OrderItem[] = [
     {

@@ -200,6 +200,10 @@ a {
   color: #9ca3af !important;
 }
 
+.mat-step-header {
+  pointer-events: none !important;
+}
+
 .notice p {
   color: rgb(181, 184, 255);
 }

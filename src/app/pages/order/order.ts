@@ -5,26 +5,28 @@ import {
   FormGroup,
   Validators,
   ReactiveFormsModule,
+  FormsModule,
   FormArray,
   AbstractControl,
   ValidationErrors,
   ValidatorFn,
 } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatStepperModule, MatStepper } from '@angular/material/stepper';
 import { MatButtonModule } from '@angular/material/button';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatDialog } from '@angular/material/dialog';
 import { Map } from '../../components/map/map';
 import { CarSelector } from '../../components/car-selector/car-selector';
 import { PaymentSelector } from '../../components/payment-selector/payment-selector';
 import { Bill } from '../../components/bill/bill';
-import { CustomDialog } from '../../components/custom-dialog/custom-dialog';
 import { CommonModule } from '@angular/common';
 import { map, startWith } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { BillInfo, CarType, LocationItem, PaymentInfo } from '../../models/order.model';
+import { CommonService } from '../../service/common-service';
+import { DialogService } from '../../service/dialog-service';
 
 // 驗證時間
 export const timeRangeValidator: ValidatorFn = (
@@ -62,6 +64,7 @@ export const timeRangeValidator: ValidatorFn = (
   standalone: true,
   imports: [
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
     MatStepperModule,
     MatButtonModule,
@@ -85,6 +88,7 @@ export class Order implements OnInit {
 
   @ViewChild(Map) mapComponent!: Map;
 
+  isAgree = false;
   isLocating = false;
   bookingForm!: FormGroup;
   price: number | null = null;
@@ -134,17 +138,20 @@ export class Order implements OnInit {
   filteredWaypointsOptions: Observable<LocationItem[]>[] = [];
 
   constructor(
+    public commonService: CommonService,
+    private dialogService: DialogService,
     private fb: FormBuilder,
     private zone: NgZone,
     private route: ActivatedRoute,
-    private dialog: MatDialog,
+    private snackBar: MatSnackBar,
   ) {
     this.bookingForm = this.fb.group(
       {
-        pickup: ['', Validators.required],
-        dropoff: ['', Validators.required],
+        pickup: ['', Validators.required], //起點
+        dropoff: ['', Validators.required], //終點
         waypoints: this.fb.array([]), // 中途停靠點
-        airplaneNumber: ['', Validators.required],
+        coords: [[]], //座標點
+        airplaneNumber: ['', Validators.required], //航班編號
         note: ['', Validators.required],
         charterTime: [8, Validators.required], // 包車時長
         rideTime: ['', Validators.required], // 開始時間
@@ -161,6 +168,7 @@ export class Order implements OnInit {
         carType: [null], // 選擇車型
         payment: [null], // 付款方式
         bill: [null], // 發票
+        discount: [''], // 優惠碼
       },
       { validators: timeRangeValidator },
     );
@@ -176,6 +184,10 @@ export class Order implements OnInit {
 
   get dropoff() {
     return this.bookingForm.get('dropoff')?.value;
+  }
+
+  get formValue() {
+    return this.bookingForm.value;
   }
 
   onCarSelected(car: CarType) {
@@ -199,40 +211,37 @@ export class Order implements OnInit {
     });
   }
 
-  onLocationSelect(option: any, event: any) {
+  onLocationSelect(option: any, event: any, control: any) {
     if (!event.isUserInput) return;
 
     // console.log('選擇地點:', option.name);
 
     if (option.name === '目前位置') {
-      this.requestLocation();
+      this.requestLocation(control);
     }
   }
 
   // 開啟gps定位
-  async requestLocation() {
+  async requestLocation(control: any) {
     if (!navigator.geolocation) {
+      control.setValue(''); // 清空該欄位
       alert('您的瀏覽器不支援定位功能');
       return;
     }
 
-    const allow = await this.dialog
-      .open(CustomDialog, {
-        panelClass: 'dark-dialog',
-        data: {
-          title: '取得定位',
-          message:
-            '我們需要您的 GPS 定位來填入目前位置，請確認已開啟手機定位服務。\n\n' +
-            '請到手機設定中開啟定位權限。\n' +
-            'iPhone：設定 → Safari → 位置 → 允許\n' +
-            'Android：設定 → 位置 → 開啟',
-        },
-        disableClose: true, // 點背景不會關閉
-      })
-      .afterClosed()
-      .toPromise();
+    // 詢問獲取gps定位的權限
+    const allow = await this.dialogService.confirmDialog(
+      '取得定位',
+      '我們需要您的 GPS 座標來定位目前位置，如果以手機瀏覽器使用本服務，請確認是否開啟手機定位服務。\n\n' +
+      '請到手機設定中開啟定位權限。\n' +
+      'iPhone：設定 → Safari → 位置 → 允許\n' +
+      'Android：設定 → 位置 → 開啟'
+    );
 
-    if (!allow) return;
+    if (!allow) {
+      control.setValue(''); // 清空該欄位
+      return;
+    }
 
     this.isLocating = true;
 
@@ -261,6 +270,7 @@ export class Order implements OnInit {
 
       (error) => {
         this.zone.run(() => {
+          control.setValue(''); // 清空該欄位
           this.isLocating = false;
         });
 
@@ -358,25 +368,62 @@ export class Order implements OnInit {
 
       // 起點
       const pickup = this.getLocation(this.bookingForm.value.pickup);
-      if (pickup) coords.push([pickup.lng, pickup.lat]);
+      if (pickup) coords.push([pickup.lat, pickup.lng]);
 
       // 中途點
       this.bookingForm.value.waypoints.forEach((name: string) => {
         const wp = this.getLocation(name);
-        if (wp) coords.push([wp.lng, wp.lat]);
+        if (wp) coords.push([wp.lat, wp.lng]);
       });
 
       // 終點
       const dropoff = this.getLocation(this.bookingForm.value.dropoff);
-      if (dropoff) coords.push([dropoff.lng, dropoff.lat]);
+      if (dropoff) coords.push([dropoff.lat, dropoff.lng]);
 
       // 傳給 map 元件畫路徑, 前往訂單下一步驟
       if (coords.length >= 2) {
         // console.log('送出座標', coords);
-        this.mapComponent.drawRoute(coords);
+
+        this.bookingForm.patchValue({
+          coords: coords,
+        });
+
+        const swapped = coords.map(([lat, lng]) => [lng, lat]);
+
+        this.mapComponent.drawRoute(swapped);
         stepper.next();
       }
     }
+  }
+
+  handleClick(link: string) {
+    if (link === 'privacy-policy') {
+      this.dialogService.privacyPolicyDialog();
+    }
+    if (link === 'notice') {
+      this.dialogService.orderNoticeDialog().subscribe((result) => {
+        if (result) {
+        }
+      });
+    }
+  }
+
+  // 送出訂單
+  sendBooking(stepper: any){
+    if(true){
+      this.showAlert('預約成功', '', 'snackbar-success');
+    } else {
+      this.showAlert('預約失敗，請稍後再試...', '', 'snackbar-error');
+    }
+  }
+
+  showAlert(message: string, message2: string, styleClass: string) {
+    this.snackBar.open(message, message2, {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      panelClass: [styleClass],
+    });
   }
 
   ngOnInit() {

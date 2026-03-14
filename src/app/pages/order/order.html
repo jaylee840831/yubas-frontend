@@ -1,5 +1,5 @@
 <div class="min-h-screen flex flex-col items-center justify-center bg-gray-900 p-4">
-  <div class="w-full max-w-3xl mt-[8vh] mb-2">
+  <div class="w-full max-w-3xl mb-2" [style.margin-top.px]="commonService.headerHeight$ | async">
     <!-- 標題 -->
     <h4 *ngIf="currentFormType === TYPE_AIRPORT">機場接送</h4>
     <h4 *ngIf="currentFormType === TYPE_CITY">市區接駁</h4>
@@ -8,7 +8,7 @@
   <mat-stepper
     [linear]="true"
     #stepper
-    class="w-full max-w-3xl min-h-[70vh] rounded-xl p-1 text-white"
+    class="w-full max-w-3xl min-h-[70vh] rounded-xl p-1"
     style="background: black"
   >
     <!-- 步驟一 填寫資料 -->
@@ -35,7 +35,7 @@
               <mat-option
                 *ngFor="let option of filteredPickupOptions | async"
                 [value]="option.name"
-                (onSelectionChange)="onLocationSelect(option, $event)"
+                (onSelectionChange)="onLocationSelect(option, $event, bookingForm.get('pickup'))"
               >
                 {{ option.name }}
                 <!-- {{ option.lat}}
@@ -67,7 +67,7 @@
                   <mat-option
                     *ngFor="let option of filteredWaypointsOptions[i] | async"
                     [value]="option.name"
-                    (onSelectionChange)="onLocationSelect(option, $event)"
+                    (onSelectionChange)="onLocationSelect(option, $event, waypoints.at(i))"
                   >
                     {{ option.name }}
                     <!-- {{ option.lat}}
@@ -101,7 +101,7 @@
               <mat-option
                 *ngFor="let option of filteredDropoffOptions | async"
                 [value]="option.name"
-                (onSelectionChange)="onLocationSelect(option, $event)"
+                (onSelectionChange)="onLocationSelect(option, $event, bookingForm.get('dropoff'))"
               >
                 {{ option.name }}
                 <!-- {{ option.lat}}
@@ -142,6 +142,7 @@
 
           <!-- 接送行程(僅包車服務) -->
           <div class="relative w-full" *ngIf="currentFormType === TYPE_CHARTER">
+            <label class="block text-sm mb-1">接送行程</label>
             <textarea
               formControlName="note"
               [maxlength]="800"
@@ -206,6 +207,13 @@
                 {{ item.label }}
               </option>
             </select>
+            <div class="mt-4 notice">
+              <p>
+                若行程等待時間為 1 小時，但車程時間為 3 小時，建議您直接選擇「8 小時包車」時數。
+              </p>
+              <p>※ 包車時數需包含實際行車時間。</p>
+              <p>※ 小提醒：請選擇正確包車時數，超時需每小時酌收500元超時費用。</p>
+            </div>
           </div>
 
           <br />
@@ -409,6 +417,15 @@
       <div class="space-y-4">
         <app-payment-selector (paymentSelected)="onPaymentSelected($event)"> </app-payment-selector>
 
+        <label class="block text-sm mb-1">優惠碼</label>
+        <input
+          type="text"
+          placeholder=""
+          matInput
+          class="w-full p-3 rounded-md border bg-gray-800/80 border-gray-700"
+        />
+
+        <br />
         <br />
 
         <h5>需要開立發票嗎?</h5>
@@ -436,7 +453,104 @@
     <mat-step>
       <ng-template matStepLabel>確認訂單</ng-template>
       <div class="space-y-4">
-        <span style="white-space: pre">{{ bookingForm.value | json }}</span>
+        <div class="mb-4 p-4 rounded-lg bg-gray-900">
+          <h5>📍 行程資訊</h5>
+          <p><strong>起點:</strong> {{ formValue.pickup }}</p>
+          <p *ngIf="currentFormType != TYPE_CHARTER">
+            <strong>中途停靠:</strong>
+            <span *ngIf="formValue.waypoints.length; else noWaypoints">
+              <span *ngFor="let w of formValue.waypoints; let i = index">
+                {{ w }}<span *ngIf="i < formValue.waypoints.length - 1">, </span>
+              </span>
+            </span>
+            <ng-template #noWaypoints>無</ng-template>
+          </p>
+          <p *ngIf="currentFormType === TYPE_CHARTER">
+            <strong>接送行程:</strong> {{ formValue.note }}
+          </p>
+          <p><strong>終點:</strong> {{ formValue.dropoff }}</p>
+          <p *ngIf="currentFormType === TYPE_AIRPORT">
+            <strong>航班編號:</strong> {{ formValue.airplaneNumber }}
+          </p>
+          <p *ngIf="currentFormType != TYPE_CHARTER">
+            <strong>乘車時間:</strong> {{ formValue.rideTime }}
+          </p>
+          <p *ngIf="currentFormType === TYPE_CHARTER">
+            <strong>包車時長:</strong> {{ formValue.charterTime }} 小時/天
+          </p>
+          <p *ngIf="currentFormType === TYPE_CHARTER">
+            <strong>開始時間:</strong> {{ formValue.rideTime }}
+          </p>
+          <p *ngIf="currentFormType === TYPE_CHARTER">
+            <strong>結束時間:</strong> {{ formValue.endTime }}
+          </p>
+
+          <br />
+
+          <h5>👨‍👩‍👧 乘客資訊</h5>
+          <p><strong>成人:</strong> {{ formValue.adults }}</p>
+          <p><strong>兒童:</strong> {{ formValue.children }}</p>
+
+          <br />
+
+          <h5>🧳 行李 / 特殊需求</h5>
+          <p><strong>20吋:</strong> {{ formValue.luggage20 }}</p>
+          <p><strong>24吋:</strong> {{ formValue.luggage24 }}</p>
+          <p><strong>28吋:</strong> {{ formValue.luggage28 }}</p>
+          <p><strong>嬰兒安全座椅:</strong> {{ formValue.childSeat }}</p>
+          <p><strong>兒童增高坐墊:</strong> {{ formValue.boosterSeat }}</p>
+          <p *ngIf="currentFormType === TYPE_AIRPORT || currentFormType === TYPE_CHARTER">
+            <strong>舉牌接送:</strong> {{ formValue.meetAndGreet || '無' }}
+          </p>
+          <p><strong>備註:</strong> {{ formValue.specialRequests || '無' }}</p>
+
+          <br />
+
+          <h5>🚗 車型與付款</h5>
+          <p>
+            <strong>車型:</strong> {{ formValue.carType?.title }} -
+            {{ formValue.carType?.price }} 元
+          </p>
+          <p><strong>付款方式:</strong> {{ formValue.payment?.label }}</p>
+
+          <br />
+
+          <h5>🧾 發票資訊</h5>
+          <p><strong>統編:</strong> {{ formValue.bill?.number || '無' }}</p>
+          <p><strong>公司:</strong> {{ formValue.bill?.company || '無' }}</p>
+          <p><strong>地址:</strong> {{ formValue.bill?.address || '無' }}</p>
+        </div>
+
+        <div class="flex items-start gap-2 p-4">
+          <!-- 勾選框 -->
+          <input
+            type="checkbox"
+            class="mt-1"
+            [(ngModel)]="isAgree"
+          />
+
+          <!-- 條款文字 -->
+          <p class="leading-relaxed">
+            我已經完全閱讀並同意 YUBAS 尤巴斯的
+            <a
+              href="javascript:void(0)"
+              class="text-blue-600 underline cursor-pointer"
+              (click)="handleClick('privacy-policy')"
+            >
+              隱私政策&服務條款
+            </a>
+            及
+            <a
+              href="javascript:void(0)"
+              class="text-blue-600 underline cursor-pointer"
+              (click)="handleClick('notice')"
+            >
+              預約注意事項
+            </a>
+            ，包括取消預約政策，逾期恕無法退款。
+          </p>
+        </div>
+
         <div class="flex justify-between pt-4">
           <button
             matStepperPrevious
@@ -445,7 +559,11 @@
             上一步
           </button>
           <button
-            class="bg-blue-600 hover:bg-blue-700 transition-colors p-3 rounded-md font-semibold cursor-pointer"
+            [disabled]="!isAgree"
+            (click)="sendBooking(stepper)"
+            class="
+              bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed
+              transition-colors p-3 rounded-md font-semibold cursor-pointer"
           >
             送出
           </button>

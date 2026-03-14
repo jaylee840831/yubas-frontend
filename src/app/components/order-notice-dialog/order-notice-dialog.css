@@ -22,10 +22,6 @@
   padding: 16px;
 }
 
-.tab-grid p {
-  color: rgb(181, 184, 255);
-}
-
 .tab-label {
 }
 
@@ -62,8 +58,7 @@
     grid-template-columns: repeat(1, 1fr);
     gap: 1.5rem;
     padding: 16px;
-    border: 1px lightgray solid;
-    border-radius: 1rem;
+    border-top: 1px lightgray solid;
   }
 
   .tab-label:not(:first-child) {
@@ -79,7 +74,7 @@
     color: gold;
   }
 
-  .tab-label h5 {
+  /* .tab-label h5 {
     color: gold;
-  }
+  } */
 }
