@@ -172,6 +172,7 @@ a {
 .dark-dialog .mat-mdc-dialog-surface {
   background: black;
   border: 1px lightgray solid;
+  border-radius: 16px;
   display: flex;
   flex-direction: column;
 }
