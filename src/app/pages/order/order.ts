@@ -94,6 +94,9 @@ export class Order implements OnInit {
   price: number | null = null;
   currentFormType = 'airport';
 
+  // 座標cache
+  private coordsCache = '';
+
   charterTimes = [
     { value: 4, label: '4小時' },
     { value: 8, label: '8小時' },
@@ -349,6 +352,15 @@ export class Order implements OnInit {
     return !!(control?.invalid && (control.dirty || control.touched));
   }
 
+  getCoords(): number[][] {
+    const { pickup, waypoints, dropoff } = this.bookingForm.value;
+
+    return [pickup, ...waypoints, dropoff]
+      .map(name => this.getLocation(name))
+      .filter((loc): loc is LocationItem => !!loc)
+      .map(loc => [loc.lat, loc.lng]);
+  }
+
   // 前往步驟二
   goToStep2(stepper: MatStepper) {
     this.removeUnusedFieldValidations();
@@ -364,35 +376,28 @@ export class Order implements OnInit {
 
       return;
     } else {
-      const coords: number[][] = [];
+      const coords = this.getCoords();
+      const newCoords = JSON.stringify(coords);
 
-      // 起點
-      const pickup = this.getLocation(this.bookingForm.value.pickup);
-      if (pickup) coords.push([pickup.lat, pickup.lng]);
+      // 座標有更新才重新畫路徑
+      if (newCoords != this.coordsCache) {
+        this.coordsCache = newCoords;
 
-      // 中途點
-      this.bookingForm.value.waypoints.forEach((name: string) => {
-        const wp = this.getLocation(name);
-        if (wp) coords.push([wp.lat, wp.lng]);
-      });
+        // 座標傳給 map 元件畫路徑
+        if (coords.length >= 2) {
+          // console.log('送出座標', coords);
 
-      // 終點
-      const dropoff = this.getLocation(this.bookingForm.value.dropoff);
-      if (dropoff) coords.push([dropoff.lat, dropoff.lng]);
+          this.bookingForm.patchValue({
+            coords: coords,
+          });
 
-      // 傳給 map 元件畫路徑, 前往訂單下一步驟
-      if (coords.length >= 2) {
-        // console.log('送出座標', coords);
-
-        this.bookingForm.patchValue({
-          coords: coords,
-        });
-
-        const swapped = coords.map(([lat, lng]) => [lng, lat]);
-
-        this.mapComponent.drawRoute(swapped);
-        stepper.next();
+          const swapped = coords.map(([lat, lng]) => [lng, lat]);
+          this.mapComponent.drawRoute(swapped);
+        }
       }
+
+      // 前往訂單下一步驟
+      stepper.next();
     }
   }
 
