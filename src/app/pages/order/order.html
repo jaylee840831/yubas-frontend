@@ -1,5 +1,9 @@
+
 <div class="min-h-screen flex flex-col items-center justify-center bg-gray-900 p-4">
-  <div class="w-full max-w-3xl mb-2" [style.margin-top.px]="commonService.headerHeight$ | async">
+  <!-- loading特效 -->
+  <app-loading [isLoading]="loading"></app-loading>
+
+  <div *ngIf="!loading" class="w-full max-w-3xl mb-2" [style.margin-top.px]="commonService.headerHeight$ | async">
     <!-- 標題 -->
     <h4 *ngIf="currentFormType === TYPE_AIRPORT">機場接送</h4>
     <h4 *ngIf="currentFormType === TYPE_CITY">市區接駁</h4>

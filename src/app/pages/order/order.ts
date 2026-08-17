@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit, NgZone } from '@angular/core';
+import { Component, ViewChild, OnInit, NgZone, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
   FormBuilder,
@@ -27,6 +27,7 @@ import { Observable } from 'rxjs';
 import { BillInfo, CarType, LocationItem, PaymentInfo } from '../../models/order.model';
 import { CommonService } from '../../service/common-service';
 import { DialogService } from '../../service/dialog-service';
+import { Loading } from '../../components/loading/loading';
 
 // 驗證時間
 export const timeRangeValidator: ValidatorFn = (
@@ -76,6 +77,7 @@ export const timeRangeValidator: ValidatorFn = (
     CarSelector,
     PaymentSelector,
     Bill,
+    Loading
   ],
   templateUrl: './order.html',
   styleUrl: './order.css',
@@ -88,6 +90,7 @@ export class Order implements OnInit {
 
   @ViewChild(Map) mapComponent!: Map;
 
+  loading = false;
   isAgree = false;
   isLocating = false;
   bookingForm!: FormGroup;
@@ -143,6 +146,7 @@ export class Order implements OnInit {
   constructor(
     public commonService: CommonService,
     private dialogService: DialogService,
+    private cdr: ChangeDetectorRef,
     private fb: FormBuilder,
     private zone: NgZone,
     private route: ActivatedRoute,
@@ -416,7 +420,13 @@ export class Order implements OnInit {
   // 送出訂單
   sendBooking(stepper: any){
     if(true){
-      this.showAlert('預約成功', '', 'snackbar-success');
+      this.loading = true;
+
+      setTimeout(() => {
+        this.loading = false;
+        this.cdr.detectChanges();
+        this.showAlert('預約成功', '', 'snackbar-success');
+      }, 3000);
     } else {
       this.showAlert('預約失敗，請稍後再試...', '', 'snackbar-error');
     }
